@@ -27,7 +27,7 @@
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="288" max="-2" attributes="0"/>
               <EmptySpace pref="191" max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnLoggaIn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -61,7 +61,7 @@
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLoggaIn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="434" max="32767" attributes="0"/>
           </Group>
@@ -102,7 +102,7 @@
         <Property name="text" type="java.lang.String" value="Hogwarts + logotyp om det g&#xe5;r"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnLoggaIn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Logga in"/>
       </Properties>
@@ -143,9 +143,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Elevhemspokalen"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
