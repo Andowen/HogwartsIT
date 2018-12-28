@@ -9,7 +9,7 @@ import java.beans.PropertyVetoException;
 
 /**
  *
- * @author andow
+ * @author Anna Svensson
  */
 public class TestFönster extends javax.swing.JFrame {
 
