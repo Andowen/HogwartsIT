@@ -7,7 +7,7 @@ package testfonster;
 
 /**
  *
- * @author andow
+ * @author Anna Svensson
  */
 public class FrmTest extends javax.swing.JInternalFrame {
 

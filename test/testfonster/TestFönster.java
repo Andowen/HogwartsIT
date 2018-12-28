@@ -92,6 +92,7 @@ public class TestFönster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnuLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuLoggaInActionPerformed
+        //Inloggningsfönstret
         if(frmLoggaIn == null || frmLoggaIn.isClosed()) {
         frmLoggaIn = new FrmLoggaIn();
         jDesktopPane2.add(frmLoggaIn);
@@ -107,6 +108,7 @@ public class TestFönster extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuLoggaInActionPerformed
 
     private void mnuTest1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTest1ActionPerformed
+        //Det stora fönstret
         if(frmTest == null || frmTest.isClosed()) {
         frmTest = new FrmTest();
         jDesktopPane2.add(frmTest);

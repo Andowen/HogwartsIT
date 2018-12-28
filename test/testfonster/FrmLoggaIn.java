@@ -7,7 +7,7 @@ package testfonster;
 
 /**
  *
- * @author andow
+ * @author Anna Svensson
  */
 public class FrmLoggaIn extends javax.swing.JInternalFrame {
 
@@ -16,6 +16,7 @@ public class FrmLoggaIn extends javax.swing.JInternalFrame {
      */
     public FrmLoggaIn() {
         initComponents();
+        // Bestämmer storleken på fönstret
         this.setSize(300, 200);
     }
 
