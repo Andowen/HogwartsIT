@@ -5,6 +5,7 @@
  */
 package hogwartsit;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
@@ -32,21 +33,76 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        tfSokRuta = new javax.swing.JTextField();
+        btnSok = new javax.swing.JButton();
+        lblPrefektNamn = new javax.swing.JLabel();
+
+        jLabel1.setText("För vilket elevhem vill du veta vem som är prefekt?");
+
+        tfSokRuta.setColumns(10);
+
+        btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfSokRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSok))
+                        .addGap(50, 50, 50)
+                        .addComponent(lblPrefektNamn)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSokRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPrefektNamn))
+                .addGap(33, 33, 33)
+                .addComponent(btnSok)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+      
+        try {
+            String indata = tfSokRuta.getText(); //Lägger in det i sökrutan i varialbeln indata.
+            String prefektnummer = "Select prefekt from elevhem where elevhemsnamn" + indata; //Hämtar prefektens IDnr i databasen och blir en String.
+            String idNr = idb.fetchSingle(prefektnummer); 
+            int i = Integer.parseInt(idNr); //Gör om IDnr till int.
+            String fraga = "SELECT fornamn from elev where elev_id" + i; //Hämtar elevens namn med hjälp av IDnr.
+            String svar = idb.fetchSingle(fraga);
+            lblPrefektNamn.setText(svar);
+        } 
+        catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Finns inget elevhem med det namnet");
+        }
+    }//GEN-LAST:event_btnSokActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSok;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblPrefektNamn;
+    private javax.swing.JTextField tfSokRuta;
     // End of variables declaration//GEN-END:variables
 }
