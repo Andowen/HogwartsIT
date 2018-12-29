@@ -85,18 +85,7 @@ public class HuvudFonster extends javax.swing.JFrame {
         setName(""); // NOI18N
 
         paneHuvudFonster.setName(""); // NOI18N
-
-        javax.swing.GroupLayout paneHuvudFonsterLayout = new javax.swing.GroupLayout(paneHuvudFonster);
-        paneHuvudFonster.setLayout(paneHuvudFonsterLayout);
-        paneHuvudFonsterLayout.setHorizontalGroup(
-            paneHuvudFonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-        paneHuvudFonsterLayout.setVerticalGroup(
-            paneHuvudFonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
-        );
-
+        paneHuvudFonster.setLayout(new java.awt.BorderLayout());
         getContentPane().add(paneHuvudFonster, java.awt.BorderLayout.CENTER);
 
         mnuMeny.setText("Meny");

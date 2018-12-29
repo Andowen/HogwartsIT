@@ -35,7 +35,7 @@ public class Validering {
         
         try{
             String instring = tf.getText();
-            Integer.parseInt(instring);        
+            Integer.parseInt(instring);   
             tf.requestFocus();  
         }
         catch(NumberFormatException e){
