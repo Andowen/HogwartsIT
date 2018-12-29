@@ -45,9 +45,7 @@ public class FrmLoggaIn extends javax.swing.JInternalFrame {
 
         setTitle("Logga in");
         setLayer(1);
-        setMaximumSize(new java.awt.Dimension(300, 200));
-        setMinimumSize(new java.awt.Dimension(300, 200));
-        setPreferredSize(new java.awt.Dimension(300, 200));
+        setMinimumSize(new java.awt.Dimension(38, 40));
 
         btnLoggaIn.setText("Logga In");
         btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +101,7 @@ public class FrmLoggaIn extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnLoggaIn)
                     .addComponent(btnAvsluta))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();

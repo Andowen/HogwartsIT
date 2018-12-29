@@ -85,7 +85,18 @@ public class HuvudFonster extends javax.swing.JFrame {
         setName(""); // NOI18N
 
         paneHuvudFonster.setName(""); // NOI18N
-        paneHuvudFonster.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout paneHuvudFonsterLayout = new javax.swing.GroupLayout(paneHuvudFonster);
+        paneHuvudFonster.setLayout(paneHuvudFonsterLayout);
+        paneHuvudFonsterLayout.setHorizontalGroup(
+            paneHuvudFonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+        paneHuvudFonsterLayout.setVerticalGroup(
+            paneHuvudFonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 374, Short.MAX_VALUE)
+        );
+
         getContentPane().add(paneHuvudFonster, java.awt.BorderLayout.CENTER);
 
         mnuMeny.setText("Meny");
@@ -364,13 +375,14 @@ public class HuvudFonster extends javax.swing.JFrame {
         // Stänger alla öppna fönster
         for (JInternalFrame ettFonster : paneHuvudFonster.getAllFrames()) {
             ettFonster.dispose();     
-        }
+            }
     }//GEN-LAST:event_mnuItmStangAllaFonsterActionPerformed
 
     private void mnuItmListaEleverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmListaEleverActionPerformed
         //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
         if(frmElevElevhem == null || frmElevElevhem.isClosed()) {
             frmElevElevhem = new FrmElevElevhemLista(idb);
+            //jTabbedPane1.addTab("Elevhem", frmElevElevhem);
             paneHuvudFonster.add(frmElevElevhem);
             }
         
