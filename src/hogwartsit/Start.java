@@ -13,14 +13,15 @@ import oru.inf.InfException;
  *
  * @author Anna Svensson och Ellinor Danielsson
  */
-public class Main {
+public class Start {
     
     private static InfDB hogwartsDatabaskoppling;
     
     // mainmetoden startar applikationen 
     public static void main(String[] args){
         System.out.println("Applikationen startar.");
-        
+          
+        nimbusStil();
         try {
             // Söker efter filmappen som applikationen körs från och letar specifikt upp databasfilen
             String databasSokvag = FileSystems.getDefault().getPath("HOGDB.FDB").toAbsolutePath().toString();
@@ -36,6 +37,27 @@ public class Main {
             //Visar ett felmeddelande om ett undantag upptäcks vid körning av metoden.
             JOptionPane.showMessageDialog(null, "Något gick visst fel!");
             System.out.println("Internt felmeddelande: " + ettUndantag.getMessage());
+        }
+        
+    }
+    
+    private static void nimbusStil() {
+        // Innehåller designelement för Huvudfönstret
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(HuvudFonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(HuvudFonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(HuvudFonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(HuvudFonster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 }

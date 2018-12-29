@@ -5,22 +5,38 @@
  */
 package hogwartsit;
 
+import java.beans.PropertyVetoException;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
+
 /**
  *
- * @author andow
+ * @author Anna Svensson och Ellinor Danielsson
  */
 public class HuvudFonster extends javax.swing.JFrame {
 
     private static InfDB idb;
+    private FrmLoggaIn frmLoggaIn;
+    private FrmElevElevhemLista frmElevElevhem;
+    private FrmElevElevhemsPokal frmElevElevhemsPokal;
+    private FrmElevKursSokElev frmElevKurser;
+    private FrmElevSokBetyg frmElevBetyg;
+    private FrmElevKursSokLarare frmElevLarare;
+    private FrmElevHittaPrefekt frmElevHittaPrefekt;
+    
+
+    
     /**
-     * Creates new form HuvudFonster
+     * Creates new form TestFönster
      */
     public HuvudFonster(InfDB idb) {
-        
         initComponents();
+        this.setSize(600, 400);
         this.idb = idb;
     }
 
@@ -33,133 +49,418 @@ public class HuvudFonster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        btnLoggaIn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jButton4 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        paneHuvudFonster = new javax.swing.JDesktopPane();
+        mnuHuvudMeny = new javax.swing.JMenuBar();
+        mnuMeny = new javax.swing.JMenu();
+        mnuItmLoggaIn = new javax.swing.JMenuItem();
+        mnuItmFonster = new javax.swing.JMenu();
+        mnuItmStangAktuelltFonster = new javax.swing.JMenuItem();
+        mnuItmStangAllaFonster = new javax.swing.JMenuItem();
+        mnuItmAvsluta = new javax.swing.JMenuItem();
+        mnuElev = new javax.swing.JMenu();
+        mnuItmElevhem = new javax.swing.JMenu();
+        mnuItmListaElever = new javax.swing.JMenuItem();
+        mnuItmElevhemsPokal = new javax.swing.JMenuItem();
+        mnuItmHittaPrefekt = new javax.swing.JMenuItem();
+        mnuItmElevKurser = new javax.swing.JMenu();
+        mnuItmKursSokElev = new javax.swing.JMenuItem();
+        mnuItmKursSokLarare = new javax.swing.JMenuItem();
+        mnuItmElevSokBetyg = new javax.swing.JMenuItem();
+        mnuLarare = new javax.swing.JMenu();
+        mnuItmLarareElevinfo = new javax.swing.JMenu();
+        mnuItmLarareNyregElev = new javax.swing.JMenuItem();
+        mnuItmLarareRedigeraElev = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        mnuItmLarareBetyg = new javax.swing.JMenu();
+        mnuItmLarareRegistreraKursbetyg = new javax.swing.JMenuItem();
+        mnuItmLarareAndraKursbetyg = new javax.swing.JMenuItem();
+        mnuItmLarareElevhem = new javax.swing.JMenu();
+        mnuItmLarareRegistreraHuspoang = new javax.swing.JMenuItem();
+        mnuItmLarareDraAvHuspoang = new javax.swing.JMenuItem();
+        mnuItmLarareBytLosenord = new javax.swing.JMenuItem();
+        mnuAdmin = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("HogwartsIT");
+        setName(""); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Hogwarts + logotyp om det går");
+        paneHuvudFonster.setName(""); // NOI18N
 
-        btnLoggaIn.setText("Logga in");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Här kan du söka information\nom elevhemmens prefekter och\nelever.");
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jTextArea4.setText("Här kan du söka information\nom vilka kurser en lärare\nhar/haft.");
-        jScrollPane4.setViewportView(jTextArea4);
-
-        jButton3.setText("Elevhemspokalen");
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("Här kan du se ställningen\ni elevhemspokalen.");
-        jScrollPane2.setViewportView(jTextArea2);
-
-        jButton4.setText("Kurser/betyg");
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jTextArea3.setText("Här kan du söka information\nom kurser som en elev varit\nregistrerad på samt se \nkursbetyg för en enskild elev.");
-        jScrollPane3.setViewportView(jTextArea3);
-
-        jButton2.setText("Elevhem");
-
-        jButton5.setText("Lärare");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
-                .addComponent(btnLoggaIn)
-                .addGap(34, 34, 34))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(32, 32, 32)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton2)
-                        .addComponent(jButton4)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3))
-                    .addGap(65, 65, 65)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton3)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addContainerGap(33, Short.MAX_VALUE)))
+        javax.swing.GroupLayout paneHuvudFonsterLayout = new javax.swing.GroupLayout(paneHuvudFonster);
+        paneHuvudFonster.setLayout(paneHuvudFonsterLayout);
+        paneHuvudFonsterLayout.setHorizontalGroup(
+            paneHuvudFonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoggaIn))
-                .addContainerGap(434, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(86, 86, 86)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton3))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1))
-                    .addGap(54, 54, 54)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4)
-                        .addComponent(jButton5))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4))
-                    .addContainerGap(53, Short.MAX_VALUE)))
+        paneHuvudFonsterLayout.setVerticalGroup(
+            paneHuvudFonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 374, Short.MAX_VALUE)
         );
+
+        getContentPane().add(paneHuvudFonster, java.awt.BorderLayout.CENTER);
+
+        mnuMeny.setText("Meny");
+
+        mnuItmLoggaIn.setText("Logga in");
+        mnuItmLoggaIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmLoggaInActionPerformed(evt);
+            }
+        });
+        mnuMeny.add(mnuItmLoggaIn);
+
+        mnuItmFonster.setText("Fönster");
+
+        mnuItmStangAktuelltFonster.setText("Stäng aktuellt fönster");
+        mnuItmStangAktuelltFonster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmStangAktuelltFonsterActionPerformed(evt);
+            }
+        });
+        mnuItmFonster.add(mnuItmStangAktuelltFonster);
+
+        mnuItmStangAllaFonster.setText("Stäng alla fönster");
+        mnuItmStangAllaFonster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmStangAllaFonsterActionPerformed(evt);
+            }
+        });
+        mnuItmFonster.add(mnuItmStangAllaFonster);
+
+        mnuMeny.add(mnuItmFonster);
+
+        mnuItmAvsluta.setText("Avsluta");
+        mnuItmAvsluta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmAvslutaActionPerformed(evt);
+            }
+        });
+        mnuMeny.add(mnuItmAvsluta);
+
+        mnuHuvudMeny.add(mnuMeny);
+
+        mnuElev.setText("Elev");
+
+        mnuItmElevhem.setText("Elevhem");
+
+        mnuItmListaElever.setText("Lista elever");
+        mnuItmListaElever.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmListaEleverActionPerformed(evt);
+            }
+        });
+        mnuItmElevhem.add(mnuItmListaElever);
+
+        mnuItmElevhemsPokal.setText("Elevhemspokalen");
+        mnuItmElevhemsPokal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmElevhemsPokalActionPerformed(evt);
+            }
+        });
+        mnuItmElevhem.add(mnuItmElevhemsPokal);
+
+        mnuItmHittaPrefekt.setText("Hitta prefekt");
+        mnuItmHittaPrefekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmHittaPrefektActionPerformed(evt);
+            }
+        });
+        mnuItmElevhem.add(mnuItmHittaPrefekt);
+
+        mnuElev.add(mnuItmElevhem);
+
+        mnuItmElevKurser.setText("Kurser");
+
+        mnuItmKursSokElev.setText("Sök elev");
+        mnuItmKursSokElev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmKursSokElevActionPerformed(evt);
+            }
+        });
+        mnuItmElevKurser.add(mnuItmKursSokElev);
+
+        mnuItmKursSokLarare.setText("Sök lärare");
+        mnuItmKursSokLarare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmKursSokLarareActionPerformed(evt);
+            }
+        });
+        mnuItmElevKurser.add(mnuItmKursSokLarare);
+
+        mnuElev.add(mnuItmElevKurser);
+
+        mnuItmElevSokBetyg.setText("Sök betyg");
+        mnuItmElevSokBetyg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmElevSokBetygActionPerformed(evt);
+            }
+        });
+        mnuElev.add(mnuItmElevSokBetyg);
+
+        mnuHuvudMeny.add(mnuElev);
+
+        mnuLarare.setText("Lärare");
+        mnuLarare.setEnabled(false);
+
+        mnuItmLarareElevinfo.setText("Elevinformation");
+
+        mnuItmLarareNyregElev.setText("Nyregistrera elev");
+        mnuItmLarareElevinfo.add(mnuItmLarareNyregElev);
+
+        mnuItmLarareRedigeraElev.setText("Redigera elev");
+        mnuItmLarareElevinfo.add(mnuItmLarareRedigeraElev);
+
+        jMenuItem1.setText("Ta bort elev");
+        jMenuItem1.setEnabled(false);
+        mnuItmLarareElevinfo.add(jMenuItem1);
+
+        mnuLarare.add(mnuItmLarareElevinfo);
+        mnuItmLarareElevinfo.getAccessibleContext().setAccessibleDescription("");
+
+        mnuItmLarareBetyg.setText("Kursbetyg");
+
+        mnuItmLarareRegistreraKursbetyg.setText("Registrera kursbetyg");
+        mnuItmLarareBetyg.add(mnuItmLarareRegistreraKursbetyg);
+
+        mnuItmLarareAndraKursbetyg.setText("Ändra kursbetyg");
+        mnuItmLarareBetyg.add(mnuItmLarareAndraKursbetyg);
+
+        mnuLarare.add(mnuItmLarareBetyg);
+
+        mnuItmLarareElevhem.setText("Elevhemspoäng");
+
+        mnuItmLarareRegistreraHuspoang.setText("Registrera huspoäng");
+        mnuItmLarareElevhem.add(mnuItmLarareRegistreraHuspoang);
+
+        mnuItmLarareDraAvHuspoang.setText("Dra av huspoäng");
+        mnuItmLarareElevhem.add(mnuItmLarareDraAvHuspoang);
+
+        mnuLarare.add(mnuItmLarareElevhem);
+
+        mnuItmLarareBytLosenord.setText("Byt lösenord");
+        mnuLarare.add(mnuItmLarareBytLosenord);
+
+        mnuHuvudMeny.add(mnuLarare);
+
+        mnuAdmin.setText("Administratör");
+        mnuAdmin.setEnabled(false);
+        mnuHuvudMeny.add(mnuAdmin);
+
+        setJMenuBar(mnuHuvudMeny);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+ 
+    private void oppnaFonster(javax.swing.JInternalFrame ettFonster, Boolean maximera) {
+        // Metoden hjälper till att öppna ett fönster och kan göra detta utifrån basklassen.       
+        ettFonster.setVisible(true);
+        ettFonster.moveToFront();
+        
+        if(maximera){
+            // Maximerar fönstret.
+            try { 
+                ettFonster.setMaximum(true);
+            }catch (PropertyVetoException ettUndantag) {
+                System.out.println(ettUndantag.getMessage());
+            }
+            
+            // Ta bort ramen och titel-baren.
+            ettFonster.setBorder(null);
+            ((javax.swing.plaf.basic.BasicInternalFrameUI)ettFonster.getUI()).setNorthPane(null); 
+        }
+        else{
+            // Lägg ett mindre fönster i mitten.
+            ettFonster.setLocation(this.getWidth()/2 - ettFonster.getWidth()/2, this.getHeight()/2 - ettFonster.getHeight()/2);
+        }
+        
+    }
+      
+    private void mnuItmLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLoggaInActionPerformed
+        //Inloggningsfönstret.
+        
+        // Kontrollerar att ett inloggningsfönster inte redan finns och instansierar isåfall ett nytt objekt av typen FrmLoggaIn.
+        if(frmLoggaIn == null || frmLoggaIn.isClosed()) {
+            
+            frmLoggaIn = new FrmLoggaIn(idb);
 
-  
+            // Lägger till en Frame Listener som observerar fönstrets olika tillstånd.
+            frmLoggaIn.addInternalFrameListener(new InternalFrameListener() {
+                @Override
+                public void internalFrameOpened(InternalFrameEvent e) {
+                    //Används ej.
+                }
+
+                @Override
+                public void internalFrameClosing(InternalFrameEvent e) {
+                    //Används ej.
+                }
+
+                @Override
+                public void internalFrameClosed(InternalFrameEvent e) {
+                    //Om fönstret stängs sker följande.
+                    if (frmLoggaIn.getArInloggad()) {
+                    //Kontrollerar om användaren är inloggad, ändrar menytexten och ger tillgång till tidigare inaktiverade menyval.
+                    mnuItmLoggaIn.setText("Logga ut");
+                    mnuAdmin.setEnabled(true);
+                    mnuLarare.setEnabled(true);
+                    }
+                } 
+                
+                @Override
+                public void internalFrameIconified(InternalFrameEvent e) {
+                    //Används ej.
+                }
+
+                @Override
+                public void internalFrameDeiconified(InternalFrameEvent e) {
+                    //Används ej.
+                }
+
+                @Override
+                public void internalFrameActivated(InternalFrameEvent e) {
+                    //Används ej.
+                }
+
+                @Override
+                public void internalFrameDeactivated(InternalFrameEvent e) {
+                    //Används ej.
+                }
+            });
+            
+            //Lägger till inloggninsfönstret i huvudfönstret
+            paneHuvudFonster.add(frmLoggaIn);
+        }
+        
+        // Kontrollerar om texten i menyobjektet överensstämmer med "Logga in", öppnar isåfall ett inloggningsfönster
+        if (mnuItmLoggaIn.getText().equals("Logga in")) {
+        oppnaFonster(frmLoggaIn, false);
+        }
+        else {
+            // Annars ändras texten till logga in, och vissa menyobjekt blir inaktiverade
+            mnuItmLoggaIn.setText("Logga in");
+            mnuAdmin.setEnabled(false);
+            mnuLarare.setEnabled(false);
+            
+            //Stänger alla öppna fönster vid utloggning
+            for (JInternalFrame ettFonster : paneHuvudFonster.getAllFrames()) {
+            ettFonster.dispose();     
+            }
+        }
+        
+    }//GEN-LAST:event_mnuItmLoggaInActionPerformed
+    
+    private void mnuItmAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmAvslutaActionPerformed
+        //Avslutar applikationen
+        System.exit(1);
+    }//GEN-LAST:event_mnuItmAvslutaActionPerformed
+
+    private void mnuItmElevSokBetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevSokBetygActionPerformed
+        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
+        if(frmElevBetyg == null || frmElevBetyg.isClosed()) {
+            frmElevBetyg = new FrmElevSokBetyg(idb);
+            paneHuvudFonster.add(frmElevBetyg);
+            }
+        
+        oppnaFonster(frmElevBetyg, true);
+    }//GEN-LAST:event_mnuItmElevSokBetygActionPerformed
+
+    private void mnuItmStangAktuelltFonsterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmStangAktuelltFonsterActionPerformed
+        // Stänger det aktuella fönstret
+        javax.swing.JInternalFrame ettFonster = paneHuvudFonster.getSelectedFrame();
+        paneHuvudFonster.getDesktopManager().closeFrame(ettFonster);
+        ettFonster.dispose();
+    }//GEN-LAST:event_mnuItmStangAktuelltFonsterActionPerformed
+
+    private void mnuItmStangAllaFonsterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmStangAllaFonsterActionPerformed
+        // Stänger alla öppna fönster
+        for (JInternalFrame ettFonster : paneHuvudFonster.getAllFrames()) {
+            ettFonster.dispose();     
+        }
+    }//GEN-LAST:event_mnuItmStangAllaFonsterActionPerformed
+
+    private void mnuItmListaEleverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmListaEleverActionPerformed
+        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
+        if(frmElevElevhem == null || frmElevElevhem.isClosed()) {
+            frmElevElevhem = new FrmElevElevhemLista(idb);
+            paneHuvudFonster.add(frmElevElevhem);
+            }
+        
+        oppnaFonster(frmElevElevhem, true);
+    }//GEN-LAST:event_mnuItmListaEleverActionPerformed
+
+    private void mnuItmElevhemsPokalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevhemsPokalActionPerformed
+        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
+        if(frmElevElevhemsPokal == null || frmElevElevhemsPokal.isClosed()) {
+            frmElevElevhemsPokal = new FrmElevElevhemsPokal(idb);
+            paneHuvudFonster.add(frmElevElevhemsPokal);
+            }
+        
+        oppnaFonster(frmElevElevhemsPokal, true);
+    }//GEN-LAST:event_mnuItmElevhemsPokalActionPerformed
+
+    private void mnuItmHittaPrefektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmHittaPrefektActionPerformed
+        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
+        if(frmElevHittaPrefekt == null || frmElevHittaPrefekt.isClosed()) {
+            frmElevHittaPrefekt = new FrmElevHittaPrefekt(idb);
+            paneHuvudFonster.add(frmElevHittaPrefekt);
+            }
+        
+        oppnaFonster(frmElevHittaPrefekt, true);
+    }//GEN-LAST:event_mnuItmHittaPrefektActionPerformed
+
+    private void mnuItmKursSokElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmKursSokElevActionPerformed
+        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
+        if(frmElevKurser == null || frmElevKurser.isClosed()) {
+            frmElevKurser = new FrmElevKursSokElev(idb);
+            paneHuvudFonster.add(frmElevKurser);
+            }
+        
+        oppnaFonster(frmElevKurser, true);
+    }//GEN-LAST:event_mnuItmKursSokElevActionPerformed
+
+    private void mnuItmKursSokLarareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmKursSokLarareActionPerformed
+        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
+        if(frmElevLarare == null || frmElevLarare.isClosed()) {
+            frmElevLarare = new FrmElevKursSokLarare(idb);
+            paneHuvudFonster.add(frmElevLarare);
+            }
+        
+        oppnaFonster(frmElevLarare, true);
+    }//GEN-LAST:event_mnuItmKursSokLarareActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLoggaIn;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu mnuAdmin;
+    private javax.swing.JMenu mnuElev;
+    private javax.swing.JMenuBar mnuHuvudMeny;
+    private javax.swing.JMenuItem mnuItmAvsluta;
+    private javax.swing.JMenu mnuItmElevKurser;
+    private javax.swing.JMenuItem mnuItmElevSokBetyg;
+    private javax.swing.JMenu mnuItmElevhem;
+    private javax.swing.JMenuItem mnuItmElevhemsPokal;
+    private javax.swing.JMenu mnuItmFonster;
+    private javax.swing.JMenuItem mnuItmHittaPrefekt;
+    private javax.swing.JMenuItem mnuItmKursSokElev;
+    private javax.swing.JMenuItem mnuItmKursSokLarare;
+    private javax.swing.JMenuItem mnuItmLarareAndraKursbetyg;
+    private javax.swing.JMenu mnuItmLarareBetyg;
+    private javax.swing.JMenuItem mnuItmLarareBytLosenord;
+    private javax.swing.JMenuItem mnuItmLarareDraAvHuspoang;
+    private javax.swing.JMenu mnuItmLarareElevhem;
+    private javax.swing.JMenu mnuItmLarareElevinfo;
+    private javax.swing.JMenuItem mnuItmLarareNyregElev;
+    private javax.swing.JMenuItem mnuItmLarareRedigeraElev;
+    private javax.swing.JMenuItem mnuItmLarareRegistreraHuspoang;
+    private javax.swing.JMenuItem mnuItmLarareRegistreraKursbetyg;
+    private javax.swing.JMenuItem mnuItmListaElever;
+    private javax.swing.JMenuItem mnuItmLoggaIn;
+    private javax.swing.JMenuItem mnuItmStangAktuelltFonster;
+    private javax.swing.JMenuItem mnuItmStangAllaFonster;
+    private javax.swing.JMenu mnuLarare;
+    private javax.swing.JMenu mnuMeny;
+    private javax.swing.JDesktopPane paneHuvudFonster;
     // End of variables declaration//GEN-END:variables
 }
+

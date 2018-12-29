@@ -3,21 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testfonster;
+package hogwartsit;
 
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /**
  *
- * @author Anna Svensson
+ * @author Anna Svensson och Ellinor Danielsson
  */
-public class FrmLoggaIn extends javax.swing.JInternalFrame {
+public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
 
+    private static InfDB idb;
+    
     /**
-     * Creates new form FrmLoggaIn
+     * Creates new form FrmTest
      */
-    public FrmLoggaIn() {
+    public FrmElevElevhemLista(InfDB idb) {
         initComponents();
-        // Bestämmer storleken på fönstret
-        this.setSize(300, 200);
+        this.idb = idb;
     }
 
     /**
@@ -29,32 +32,27 @@ public class FrmLoggaIn extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        jButton1.setText("Logga In");
+        setBorder(null);
 
-        jButton2.setText("Avsluta");
+        jLabel1.setText("Detta skulle kunna vara ett formulär");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(38, 38, 38))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(jLabel1)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         pack();
@@ -62,7 +60,6 @@ public class FrmLoggaIn extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

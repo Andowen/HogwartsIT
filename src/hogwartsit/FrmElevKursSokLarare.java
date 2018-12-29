@@ -3,19 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testfonster;
+package hogwartsit;
 
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /**
  *
- * @author Anna Svensson
+ * @author Anna Svensson och Ellinor Danielsson
  */
-public class FrmTest extends javax.swing.JInternalFrame {
+public class FrmElevKursSokLarare extends javax.swing.JInternalFrame {
 
+    private static InfDB idb;
+    
     /**
-     * Creates new form FrmTest
+     * Creates new form FrmElevLarare
      */
-    public FrmTest() {
+    public FrmElevKursSokLarare(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -27,27 +32,15 @@ public class FrmTest extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-
-        setBorder(null);
-
-        jLabel1.setText("Detta skulle kunna vara ett formulär");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(105, Short.MAX_VALUE))
+            .addGap(0, 394, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jLabel1)
-                .addContainerGap(153, Short.MAX_VALUE))
+            .addGap(0, 274, Short.MAX_VALUE)
         );
 
         pack();
@@ -55,6 +48,5 @@ public class FrmTest extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
