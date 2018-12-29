@@ -36,7 +36,7 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         tfSokRuta = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
-        lblPrefektNamn = new javax.swing.JLabel();
+        tfTest = new javax.swing.JTextField();
 
         jLabel1.setText("För vilket elevhem vill du veta vem som är prefekt?");
 
@@ -48,6 +48,8 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
                 btnSokActionPerformed(evt);
             }
         });
+
+        tfTest.setColumns(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,7 +64,7 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
                             .addComponent(tfSokRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSok))
                         .addGap(50, 50, 50)
-                        .addComponent(lblPrefektNamn)))
+                        .addComponent(tfTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -73,7 +75,7 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfSokRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPrefektNamn))
+                    .addComponent(tfTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(btnSok)
                 .addContainerGap(113, Short.MAX_VALUE))
@@ -86,12 +88,12 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
       
         try {
             String indata = tfSokRuta.getText(); //Lägger in det i sökrutan i varialbeln indata.
-            String prefektnummer = "Select prefekt from elevhem where elevhemsnamn" + indata; //Hämtar prefektens IDnr i databasen och blir en String.
+            String prefektnummer = "Select prefekt from elevhem where elevhemsnamn=" + indata; //Hämtar prefektens IDnr i databasen och blir en String.
             String idNr = idb.fetchSingle(prefektnummer); 
             int i = Integer.parseInt(idNr); //Gör om IDnr till int.
-            String fraga = "SELECT fornamn from elev where elev_id" + i; //Hämtar elevens namn med hjälp av IDnr.
+            String fraga = "SELECT fornamn from elev where elev_id=" + i; //Hämtar elevens namn med hjälp av IDnr.
             String svar = idb.fetchSingle(fraga);
-            lblPrefektNamn.setText(svar);
+            tfTest.setText(svar);
         } 
         catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Finns inget elevhem med det namnet");
@@ -102,7 +104,7 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblPrefektNamn;
     private javax.swing.JTextField tfSokRuta;
+    private javax.swing.JTextField tfTest;
     // End of variables declaration//GEN-END:variables
 }
