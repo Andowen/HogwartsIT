@@ -10,21 +10,21 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Anna Svensson och Ellinor Danielsson
+ * @author andow
  */
-public class FrmLoggaIn extends javax.swing.JInternalFrame {
+public class FrmLoggaIn extends javax.swing.JFrame {
 
     private static InfDB idb;
     private boolean arInloggad = false;
-   
+    
     /**
-     * Creates new form FrmLoggaIn
+     * Creates new form FrmLoggaIn2
      */
     public FrmLoggaIn(InfDB idb) {
         initComponents();
         this.idb = idb;
         // Bestämmer storleken på fönstret
-        this.setSize(300, 200);
+        this.setSize(340, 300);
     }
 
     /**
@@ -42,10 +42,13 @@ public class FrmLoggaIn extends javax.swing.JInternalFrame {
         tfLosenord = new javax.swing.JPasswordField();
         lblAnvandarnamn = new javax.swing.JLabel();
         lblLosenord = new javax.swing.JLabel();
+        lblValkommen = new javax.swing.JLabel();
+        lblLoggaIn = new javax.swing.JLabel();
 
-        setTitle("Logga in");
-        setLayer(1);
-        setMinimumSize(new java.awt.Dimension(38, 40));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Logga In");
+        setAlwaysOnTop(true);
+        setResizable(false);
 
         btnLoggaIn.setText("Logga In");
         btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
@@ -69,27 +72,39 @@ public class FrmLoggaIn extends javax.swing.JInternalFrame {
 
         lblLosenord.setText("Lösenord:");
 
+        lblValkommen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblValkommen.setText("Välkommen!");
+
+        lblLoggaIn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblLoggaIn.setText("Logga in som lärare eller administratör");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lblAnvandarnamn)
-                    .addComponent(lblLosenord)
                     .addComponent(tfAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAnvandarnamn)
+                    .addComponent(lblLosenord)
+                    .addComponent(lblValkommen)
+                    .addComponent(lblLoggaIn)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLoggaIn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAvsluta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(56, Short.MAX_VALUE)
+                .addComponent(lblValkommen)
+                .addGap(18, 18, 18)
+                .addComponent(lblLoggaIn)
+                .addGap(18, 18, 18)
                 .addComponent(lblAnvandarnamn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfAnvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -101,37 +116,37 @@ public class FrmLoggaIn extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnLoggaIn)
                     .addComponent(btnAvsluta))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public boolean getArInloggad(){
-        //Metod som ska returnera en boolean om någon är inloggad eller inte, för användning i HuvudFonster-klassen
-        return arInloggad;
-    }
-    
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         //Validerar inloggningen och stänger sedan fönstret
         // Här ska validering av användarnamn och lösenord ske, men just nu loggar man helt enkelt in genom att trycka på knappen
         arInloggad = true;
         this.dispose();
-        
-        
+
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
         //Stänger fönstret
         this.dispose();
     }//GEN-LAST:event_btnAvslutaActionPerformed
-
+  
+    public boolean getArInloggad(){
+        //Metod som ska returnera en boolean om någon är inloggad eller inte, för användning i HuvudFonster-klassen
+        return arInloggad;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvsluta;
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JLabel lblAnvandarnamn;
+    private javax.swing.JLabel lblLoggaIn;
     private javax.swing.JLabel lblLosenord;
+    private javax.swing.JLabel lblValkommen;
     private javax.swing.JTextField tfAnvandarnamn;
     private javax.swing.JPasswordField tfLosenord;
     // End of variables declaration//GEN-END:variables
