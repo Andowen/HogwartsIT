@@ -99,17 +99,12 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
       
         try {
             String indata = tfSokRuta.getText(); //Lägger in det i sökrutan i varialbeln indata.
-<<<<<<< HEAD
-            String prefektnummer = "Select prefekt from elevhem where elevhemsnamn = " + indata; //Hämtar prefektens IDnr i databasen och blir en String.
-            String idNr = idb.fetchSingle(prefektnummer);
-             // int i = Integer.parseInt(idNr); //Gör om IDnr till int.
-            String fraga = "SELECT fornamn from elev where elev_id=" + idNr; //Hämtar elevens namn med hjälp av IDnr.
-=======
+
             String prefektnummer = "Select prefekt from elevhem where elevhemsnamn=" + "\'" + indata + "\'"; //Hämtar prefektens IDnr i databasen och blir en String.
             String idNr = idb.fetchSingle(prefektnummer); 
             int i = Integer.parseInt(idNr); //Gör om IDnr till int.
             String fraga = "SELECT fornamn from elev where elev_id=" + i; //Hämtar elevens namn med hjälp av IDnr.
->>>>>>> c47d4d964981e196d5d591abffd6b8a5f142df79
+
             String svar = idb.fetchSingle(fraga);
             tfTest.setText(svar);
         } 
