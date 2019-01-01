@@ -10,7 +10,7 @@ import java.awt.event.WindowListener;
 import java.beans.PropertyVetoException;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-
+import org.seamless.swing.ClosableTabbedPane;
 
 /**
  *
@@ -26,7 +26,7 @@ public class HuvudFonster extends javax.swing.JFrame {
     private FrmElevSokBetyg frmElevBetyg;
     private FrmElevKursSokLarare frmElevLarare;
     private FrmElevHittaPrefekt frmElevHittaPrefekt;
-
+    private ClosableTabbedPane paneHuvudfonsterFlikar;
     
 
     
@@ -37,6 +37,8 @@ public class HuvudFonster extends javax.swing.JFrame {
         initComponents();
         this.setSize(600, 400);
         this.idb = idb;
+        paneHuvudfonsterFlikar = new ClosableTabbedPane() ;
+        getContentPane().add(paneHuvudfonsterFlikar);
     }
 
     /**
@@ -48,7 +50,6 @@ public class HuvudFonster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        paneHuvudfonsterFlikar = new javax.swing.JTabbedPane();
         mnuHuvudMeny = new javax.swing.JMenuBar();
         mnuMeny = new javax.swing.JMenu();
         mnuItmLoggaIn = new javax.swing.JMenuItem();
@@ -82,7 +83,6 @@ public class HuvudFonster extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HogwartsIT");
         setName(""); // NOI18N
-        getContentPane().add(paneHuvudfonsterFlikar, java.awt.BorderLayout.PAGE_START);
 
         mnuMeny.setText("Meny");
 
@@ -284,7 +284,7 @@ public class HuvudFonster extends javax.swing.JFrame {
                 public void windowClosed(WindowEvent e) {
                     //Om fönstret stängs sker följande.
                     if (frmLoggaIn.getArInloggad()) {
-                    //Kontrollerar om användaren är inloggad, ändrar menytexten och ger tillgång till tidigare inaktiverade menyval.
+                    //Kontrollerar att användaren är inloggad, ändrar menytexten och ger tillgång till tidigare inaktiverade menyval.
                     mnuItmLoggaIn.setText("Logga ut");
                     mnuAdmin.setEnabled(true);
                     mnuLarare.setEnabled(true);
@@ -335,7 +335,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmElevSokBetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevSokBetygActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevBetyg == null || !frmElevBetyg.isEnabled()) {
+        if(frmElevBetyg == null || !frmElevBetyg.isShowing()) {
            frmElevBetyg = new FrmElevSokBetyg(idb);
             oppnaFlik(frmElevBetyg, "Sök betyg");
             }
@@ -357,7 +357,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmListaEleverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmListaEleverActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevElevhemslista == null || !frmElevElevhemslista.isEnabled()) {
+        if(frmElevElevhemslista == null || !frmElevElevhemslista.isShowing()) {
            frmElevElevhemslista = new FrmElevElevhemLista(idb);
             oppnaFlik(frmElevElevhemslista, "Elevhemslista");
             }
@@ -370,7 +370,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmElevhemsPokalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevhemsPokalActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevElevhemsPokal == null || !frmElevElevhemsPokal.isEnabled()) {
+        if(frmElevElevhemsPokal == null || !frmElevElevhemsPokal.isShowing()) {
            frmElevElevhemsPokal = new FrmElevElevhemsPokal(idb);
             oppnaFlik(frmElevElevhemsPokal, "Ställning elevhemspokalen");
             }
@@ -383,7 +383,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmHittaPrefektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmHittaPrefektActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevHittaPrefekt == null || !frmElevHittaPrefekt.isEnabled()) {
+        if(frmElevHittaPrefekt == null || !frmElevHittaPrefekt.isShowing()) {
            frmElevHittaPrefekt = new FrmElevHittaPrefekt(idb);
             oppnaFlik(frmElevHittaPrefekt, "Hitta prefekt");
             }
@@ -396,7 +396,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmKursSokElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmKursSokElevActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevKurser == null || !frmElevKurser.isEnabled()) {
+        if(frmElevKurser == null || !frmElevKurser.isShowing()) {
            frmElevKurser = new FrmElevKursSokElev(idb);
             oppnaFlik(frmElevKurser, "Sök kurs för elev");
             }
@@ -409,7 +409,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmKursSokLarareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmKursSokLarareActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevLarare == null || !frmElevLarare.isEnabled()) {
+        if(frmElevLarare == null || !frmElevLarare.isShowing()) {
            frmElevLarare = new FrmElevKursSokLarare(idb);
             oppnaFlik(frmElevLarare, "Sök lärare för kurs");
             }
@@ -452,7 +452,6 @@ public class HuvudFonster extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuItmStangAllaFonster;
     private javax.swing.JMenu mnuLarare;
     private javax.swing.JMenu mnuMeny;
-    private javax.swing.JTabbedPane paneHuvudfonsterFlikar;
     // End of variables declaration//GEN-END:variables
 }
 

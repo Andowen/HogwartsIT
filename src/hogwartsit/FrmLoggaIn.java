@@ -136,7 +136,7 @@ public class FrmLoggaIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAvslutaActionPerformed
   
     public boolean getArInloggad(){
-        //Metod som ska returnera en boolean om någon är inloggad eller inte, för användning i HuvudFonster-klassen
+        //Metoden returnerar en boolean om någon är inloggad eller inte, för användning i HuvudFonster-klassen
         return arInloggad;
     }
 
