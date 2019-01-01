@@ -10,7 +10,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author andow
+ * @author Anna Svensson och Ellinor Danielsson
  */
 public class FrmLoggaIn extends javax.swing.JFrame {
 

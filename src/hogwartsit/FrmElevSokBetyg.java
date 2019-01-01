@@ -9,7 +9,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
  *
- * @author andow
+ * @author Anna Svensson och Ellinor Danielsson
  */
 public class FrmElevSokBetyg extends javax.swing.JInternalFrame {
     
