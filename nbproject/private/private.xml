@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevHittaPrefekt.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevElevhemsPokal.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/HuvudFonster.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevElevhemLista.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/Validering.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevKursSokElev.java</file>
             <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/Start.java</file>
-=======
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevHittaPrefekt.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/Validering.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/Start.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/HuvudFonster.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevKursSokElev.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevElevhemsPokal.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevKursSokLarare.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevElevhemLista.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmLoggaIn.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevSokBetyg.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/tfSokRuta.java</file>
->>>>>>> ba60eb38b6300b68bac7901eb6be40b833cf99d3
+            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevKursSokLarare.java</file>
         </group>
     </open-files>
 </project-private>
