@@ -285,9 +285,11 @@ public class HuvudFonster extends javax.swing.JFrame {
                     //Om fönstret stängs sker följande.
                     if (frmLoggaIn.getArInloggad()) {
                     //Kontrollerar att användaren är inloggad, ändrar menytexten och ger tillgång till tidigare inaktiverade menyval.
-                    mnuItmLoggaIn.setText("Logga ut");
-                    mnuAdmin.setEnabled(true);
-                    mnuLarare.setEnabled(true);
+                        mnuItmLoggaIn.setText("Logga ut");    
+                        mnuLarare.setEnabled(true);
+                        if(frmLoggaIn.getArAdmin()) {
+                           mnuAdmin.setEnabled(true); 
+                        }                  
                     }
                 }
 
