@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author ellin
+ * @author Anna Svensson och Ellinor Danielsson
  */
 public class Validering {
     
