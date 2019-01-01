@@ -5,14 +5,12 @@
  */
 package hogwartsit;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.beans.PropertyVetoException;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-
+import org.seamless.swing.ClosableTabbedPane;
 
 /**
  *
@@ -22,12 +20,13 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private static InfDB idb;
     private FrmLoggaIn frmLoggaIn;
-    private FrmElevElevhemLista frmElevElevhem;
+    private FrmElevElevhemLista frmElevElevhemslista;
     private FrmElevElevhemsPokal frmElevElevhemsPokal;
     private FrmElevKursSokElev frmElevKurser;
     private FrmElevSokBetyg frmElevBetyg;
     private FrmElevKursSokLarare frmElevLarare;
     private FrmElevHittaPrefekt frmElevHittaPrefekt;
+    private ClosableTabbedPane paneHuvudfonsterFlikar;
     
 
     
@@ -38,6 +37,8 @@ public class HuvudFonster extends javax.swing.JFrame {
         initComponents();
         this.setSize(600, 400);
         this.idb = idb;
+        paneHuvudfonsterFlikar = new ClosableTabbedPane() ;
+        getContentPane().add(paneHuvudfonsterFlikar);
     }
 
     /**
@@ -49,7 +50,6 @@ public class HuvudFonster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        paneHuvudFonster = new javax.swing.JDesktopPane();
         mnuHuvudMeny = new javax.swing.JMenuBar();
         mnuMeny = new javax.swing.JMenu();
         mnuItmLoggaIn = new javax.swing.JMenuItem();
@@ -83,21 +83,6 @@ public class HuvudFonster extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HogwartsIT");
         setName(""); // NOI18N
-
-        paneHuvudFonster.setName(""); // NOI18N
-
-        javax.swing.GroupLayout paneHuvudFonsterLayout = new javax.swing.GroupLayout(paneHuvudFonster);
-        paneHuvudFonster.setLayout(paneHuvudFonsterLayout);
-        paneHuvudFonsterLayout.setHorizontalGroup(
-            paneHuvudFonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-        paneHuvudFonsterLayout.setVerticalGroup(
-            paneHuvudFonsterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(paneHuvudFonster, java.awt.BorderLayout.CENTER);
 
         mnuMeny.setText("Meny");
 
@@ -251,102 +236,96 @@ public class HuvudFonster extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
  
-    private void oppnaFonster(javax.swing.JInternalFrame ettFonster, Boolean maximera) {
-        // Metoden hjälper till att öppna ett fönster och kan göra detta utifrån basklassen.       
-        ettFonster.setVisible(true);
-        ettFonster.moveToFront();
-        
-        if(maximera){
-            // Maximerar fönstret.
+    private void oppnaFlik(javax.swing.JInternalFrame enFlik, String flikTitel) {
+        // Metoden hjälper till att öppna en flik och kan göra detta utifrån basklassen.       
+        paneHuvudfonsterFlikar.addTab(flikTitel, enFlik);
+        paneHuvudfonsterFlikar.setSelectedIndex(paneHuvudfonsterFlikar.getTabCount()-1);
+            // Maximerar fliken.
             try { 
-                ettFonster.setMaximum(true);
+                enFlik.setMaximum(true);
             }catch (PropertyVetoException ettUndantag) {
                 System.out.println(ettUndantag.getMessage());
             }
             
-            // Ta bort ramen och titel-baren.
-            ettFonster.setBorder(null);
-            ((javax.swing.plaf.basic.BasicInternalFrameUI)ettFonster.getUI()).setNorthPane(null); 
+            // Tar bort ramen och huvudet från fönstret.
+            enFlik.setBorder(null);
+            ((javax.swing.plaf.basic.BasicInternalFrameUI)enFlik.getUI()).setNorthPane(null); 
         }
-        else{
-            // Lägg ett mindre fönster i mitten.
-            ettFonster.setLocation(this.getWidth()/2 - ettFonster.getWidth()/2, this.getHeight()/2 - ettFonster.getHeight()/2);
+    
+    private void flyttaFokusTillFlik(String flikTitel) {
+        //Flyttar fokus till fliken
+        int tabCount = paneHuvudfonsterFlikar.getTabCount();
+        for (int i=0; i < tabCount; i++) 
+        {
+            String tabTitle = paneHuvudfonsterFlikar.getTitleAt(i);
+            if (tabTitle.equals(flikTitel)){ 
+                paneHuvudfonsterFlikar.setSelectedIndex(i);
+            }
         }
-        
     }
-      
+
     private void mnuItmLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLoggaInActionPerformed
-        //Inloggningsfönstret.
-        
-        // Kontrollerar att ett inloggningsfönster inte redan finns och instansierar isåfall ett nytt objekt av typen FrmLoggaIn.
-        if(frmLoggaIn == null || frmLoggaIn.isClosed()) {
-            
+        //Instansierar ett inloggningsfönster om ett sådant inte redan finns.
+        if(frmLoggaIn == null || !frmLoggaIn.isShowing()) {
             frmLoggaIn = new FrmLoggaIn(idb);
-
-            // Lägger till en Frame Listener som observerar fönstrets olika tillstånd.
-            frmLoggaIn.addInternalFrameListener(new InternalFrameListener() {
+            //Lägger till en Window Listener som observerar fönstrets aktuella tillstånd.
+            frmLoggaIn.addWindowListener(new WindowListener() {
                 @Override
-                public void internalFrameOpened(InternalFrameEvent e) {
+                public void windowOpened(WindowEvent e) {
                     //Används ej.
                 }
 
                 @Override
-                public void internalFrameClosing(InternalFrameEvent e) {
+                public void windowClosing(WindowEvent e) {
                     //Används ej.
                 }
 
                 @Override
-                public void internalFrameClosed(InternalFrameEvent e) {
+                public void windowClosed(WindowEvent e) {
                     //Om fönstret stängs sker följande.
                     if (frmLoggaIn.getArInloggad()) {
-                    //Kontrollerar om användaren är inloggad, ändrar menytexten och ger tillgång till tidigare inaktiverade menyval.
+                    //Kontrollerar att användaren är inloggad, ändrar menytexten och ger tillgång till tidigare inaktiverade menyval.
                     mnuItmLoggaIn.setText("Logga ut");
                     mnuAdmin.setEnabled(true);
                     mnuLarare.setEnabled(true);
                     }
-                } 
-                
+                }
+
                 @Override
-                public void internalFrameIconified(InternalFrameEvent e) {
+                public void windowIconified(WindowEvent e) {
                     //Används ej.
                 }
 
                 @Override
-                public void internalFrameDeiconified(InternalFrameEvent e) {
+                public void windowDeiconified(WindowEvent e) {
                     //Används ej.
                 }
 
                 @Override
-                public void internalFrameActivated(InternalFrameEvent e) {
+                public void windowActivated(WindowEvent e) {
                     //Används ej.
                 }
 
                 @Override
-                public void internalFrameDeactivated(InternalFrameEvent e) {
+                public void windowDeactivated(WindowEvent e) {
                     //Används ej.
                 }
             });
             
-            //Lägger till inloggninsfönstret i huvudfönstret
-            paneHuvudFonster.add(frmLoggaIn);
-        }
-        
-        // Kontrollerar om texten i menyobjektet överensstämmer med "Logga in", öppnar isåfall ett inloggningsfönster
-        if (mnuItmLoggaIn.getText().equals("Logga in")) {
-        oppnaFonster(frmLoggaIn, false);
-        }
-        else {
-            // Annars ändras texten till logga in, och vissa menyobjekt blir inaktiverade
-            mnuItmLoggaIn.setText("Logga in");
-            mnuAdmin.setEnabled(false);
-            mnuLarare.setEnabled(false);
-            
-            //Stänger alla öppna fönster vid utloggning
-            for (JInternalFrame ettFonster : paneHuvudFonster.getAllFrames()) {
-            ettFonster.dispose();     
+            // Om texten i menyn visar "Logga in" öppnas ett inloggningsfönster och placeras i mitten
+            if (mnuItmLoggaIn.getText().equals("Logga in")) {
+                frmLoggaIn.setVisible(true);
+                frmLoggaIn.setLocation(this.getWidth()/2 - frmLoggaIn.getWidth()/2, this.getHeight()/2 - frmLoggaIn.getHeight()/2);
             }
-        }
-        
+            else {
+                // Annars ändras texten till logga in, och vissa menyobjekt blir inaktiverade
+                mnuItmLoggaIn.setText("Logga in");
+                mnuAdmin.setEnabled(false);
+                mnuLarare.setEnabled(false);
+                //Stänger alla öppna flikar vid utloggning.
+                paneHuvudfonsterFlikar.removeAll();
+            }              
+        }       
     }//GEN-LAST:event_mnuItmLoggaInActionPerformed
     
     private void mnuItmAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmAvslutaActionPerformed
@@ -355,77 +334,90 @@ public class HuvudFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuItmAvslutaActionPerformed
 
     private void mnuItmElevSokBetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevSokBetygActionPerformed
-        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
-        if(frmElevBetyg == null || frmElevBetyg.isClosed()) {
-            frmElevBetyg = new FrmElevSokBetyg(idb);
-            paneHuvudFonster.add(frmElevBetyg);
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmElevBetyg == null || !frmElevBetyg.isShowing()) {
+           frmElevBetyg = new FrmElevSokBetyg(idb);
+            oppnaFlik(frmElevBetyg, "Sök betyg");
             }
         
-        oppnaFonster(frmElevBetyg, true);
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Sök betyg");
+        }
     }//GEN-LAST:event_mnuItmElevSokBetygActionPerformed
 
     private void mnuItmStangAktuelltFonsterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmStangAktuelltFonsterActionPerformed
-        // Stänger det aktuella fönstret
-        javax.swing.JInternalFrame ettFonster = paneHuvudFonster.getSelectedFrame();
-        paneHuvudFonster.getDesktopManager().closeFrame(ettFonster);
-        ettFonster.dispose();
+        int enFlik = paneHuvudfonsterFlikar.getSelectedIndex();
+        paneHuvudfonsterFlikar.remove(enFlik);      
     }//GEN-LAST:event_mnuItmStangAktuelltFonsterActionPerformed
 
     private void mnuItmStangAllaFonsterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmStangAllaFonsterActionPerformed
-        // Stänger alla öppna fönster
-        for (JInternalFrame ettFonster : paneHuvudFonster.getAllFrames()) {
-            ettFonster.dispose();     
-        }
+        paneHuvudfonsterFlikar.removeAll();
     }//GEN-LAST:event_mnuItmStangAllaFonsterActionPerformed
 
     private void mnuItmListaEleverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmListaEleverActionPerformed
-        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
-        if(frmElevElevhem == null || frmElevElevhem.isClosed()) {
-            frmElevElevhem = new FrmElevElevhemLista(idb);
-            paneHuvudFonster.add(frmElevElevhem);
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmElevElevhemslista == null || !frmElevElevhemslista.isShowing()) {
+           frmElevElevhemslista = new FrmElevElevhemLista(idb);
+            oppnaFlik(frmElevElevhemslista, "Elevhemslista");
             }
         
-        oppnaFonster(frmElevElevhem, true);
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Elevhemslista");
+        }
     }//GEN-LAST:event_mnuItmListaEleverActionPerformed
 
     private void mnuItmElevhemsPokalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevhemsPokalActionPerformed
-        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
-        if(frmElevElevhemsPokal == null || frmElevElevhemsPokal.isClosed()) {
-            frmElevElevhemsPokal = new FrmElevElevhemsPokal(idb);
-            paneHuvudFonster.add(frmElevElevhemsPokal);
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmElevElevhemsPokal == null || !frmElevElevhemsPokal.isShowing()) {
+           frmElevElevhemsPokal = new FrmElevElevhemsPokal(idb);
+            oppnaFlik(frmElevElevhemsPokal, "Ställning elevhemspokalen");
             }
         
-        oppnaFonster(frmElevElevhemsPokal, true);
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Ställning elevhemspokalen");
+        }
     }//GEN-LAST:event_mnuItmElevhemsPokalActionPerformed
 
     private void mnuItmHittaPrefektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmHittaPrefektActionPerformed
-        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
-        if(frmElevHittaPrefekt == null || frmElevHittaPrefekt.isClosed()) {
-            frmElevHittaPrefekt = new FrmElevHittaPrefekt(idb);
-            paneHuvudFonster.add(frmElevHittaPrefekt);
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmElevHittaPrefekt == null || !frmElevHittaPrefekt.isShowing()) {
+           frmElevHittaPrefekt = new FrmElevHittaPrefekt(idb);
+            oppnaFlik(frmElevHittaPrefekt, "Hitta prefekt");
             }
         
-        oppnaFonster(frmElevHittaPrefekt, true);
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Hitta prefekt");
+        }
     }//GEN-LAST:event_mnuItmHittaPrefektActionPerformed
 
     private void mnuItmKursSokElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmKursSokElevActionPerformed
-        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
-        if(frmElevKurser == null || frmElevKurser.isClosed()) {
-            frmElevKurser = new FrmElevKursSokElev(idb);
-            paneHuvudFonster.add(frmElevKurser);
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmElevKurser == null || !frmElevKurser.isShowing()) {
+           frmElevKurser = new FrmElevKursSokElev(idb);
+            oppnaFlik(frmElevKurser, "Sök kurs för elev");
             }
         
-        oppnaFonster(frmElevKurser, true);
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Sök kurs för elev");
+        }
     }//GEN-LAST:event_mnuItmKursSokElevActionPerformed
 
     private void mnuItmKursSokLarareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmKursSokLarareActionPerformed
-        //Ett fönster instansieras och/eller öppnas beroende på om ett objekt av typen redan finns eller ej.
-        if(frmElevLarare == null || frmElevLarare.isClosed()) {
-            frmElevLarare = new FrmElevKursSokLarare(idb);
-            paneHuvudFonster.add(frmElevLarare);
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmElevLarare == null || !frmElevLarare.isShowing()) {
+           frmElevLarare = new FrmElevKursSokLarare(idb);
+            oppnaFlik(frmElevLarare, "Sök lärare för kurs");
             }
         
-        oppnaFonster(frmElevLarare, true);
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Sök lärare för kurs");
+        }
     }//GEN-LAST:event_mnuItmKursSokLarareActionPerformed
 
 
@@ -460,7 +452,6 @@ public class HuvudFonster extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuItmStangAllaFonster;
     private javax.swing.JMenu mnuLarare;
     private javax.swing.JMenu mnuMeny;
-    private javax.swing.JDesktopPane paneHuvudFonster;
     // End of variables declaration//GEN-END:variables
 }
 
