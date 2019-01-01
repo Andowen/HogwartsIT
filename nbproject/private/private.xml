@@ -3,8 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevSokBetyg.java</file>
             <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevKursSokElev.java</file>
+=======
+
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/Start.java</file>
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/HuvudFonster.java</file>
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmLoggaIn.java</file>
+
+>>>>>>> 9a8f54dcde9104f09bb6f7a7c4425f84653342b6
             <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/Start.java</file>
             <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevKursSokLarare.java</file>
         </group>

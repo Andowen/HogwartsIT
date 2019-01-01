@@ -5,6 +5,8 @@
  */
 package hogwartsit;
 
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -16,6 +18,8 @@ public class FrmLoggaIn extends javax.swing.JFrame {
 
     private static InfDB idb;
     private boolean arInloggad = false;
+    private boolean arAdmin = false;
+    private Validering validering;
     
     /**
      * Creates new form FrmLoggaIn2
@@ -124,10 +128,46 @@ public class FrmLoggaIn extends javax.swing.JFrame {
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         //Validerar inloggningen och stänger sedan fönstret
-        // Här ska validering av användarnamn och lösenord ske, men just nu loggar man helt enkelt in genom att trycka på knappen
-        arInloggad = true;
-        this.dispose();
+        //Kontrollerar att textfälten inte är tomma.
+        if (validering.textfaltHarVarde(tfAnvandarnamn) && validering.textfaltHarVarde(tfLosenord)){
+            // Hämtar texten i textfältet användarnamn, splittar strängen vid mellanslag och skapar en array av strängar.
+            String[] anvandarNamnet = tfAnvandarnamn.getText().trim().split("\\s+");
+            // Hämtar lösenordet och konverterar det till en sträng.
+            String losenordet = String.valueOf(tfLosenord.getPassword());
+            String forNamn = anvandarNamnet[0];
+            String efterNamn = anvandarNamnet[1];
+            
+                try {
+                //Hämtar lösenord och administratörsstatus från läraren.
+                HashMap<String, String> resultat = idb.fetchRow("SELECT losenord, administrator FROM larare WHERE fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'"); 
+                
+                String losenord = resultat.get("LOSENORD");
+                String administrator = resultat.get("ADMINISTRATOR");
+                
+                    //Kontrollerar att lösenordet som skrivits matchar det som är lagrat i databasen
+                    if (losenordet.equals(losenord)) {
+                        arInloggad = true;
+                    
+                        //Kontrollerar om användaren har administratörs-status eller ej
+                        if (administrator.equals("T")) {
+                            arAdmin = true; 
+                        }
+                
+                        this.dispose();
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Felaktigt lösenord.");
+                    }
+                } 
+                catch (InfException ettUndantag) {
+                    JOptionPane.showMessageDialog(null, "Felaktigt användarnamn.");
+                }
+                catch (NullPointerException ettAnnatUndantag) {
+                    JOptionPane.showMessageDialog(null, "Felaktigt användarnamn.");
+                }
+                    
 
+        }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void btnAvslutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvslutaActionPerformed
@@ -138,6 +178,11 @@ public class FrmLoggaIn extends javax.swing.JFrame {
     public boolean getArInloggad(){
         //Metoden returnerar en boolean om någon är inloggad eller inte, för användning i HuvudFonster-klassen
         return arInloggad;
+    }
+    
+    public boolean getArAdmin() {
+         //Metoden returnerar en boolean om någon är administratör eller inte, för användning i HuvudFonster-klassen
+        return arAdmin;       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
