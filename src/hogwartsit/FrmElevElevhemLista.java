@@ -35,7 +35,7 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
         tfFraga = new javax.swing.JLabel();
         btnSok = new javax.swing.JButton();
         tfElevhemSok = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        spElevhemmensElever = new javax.swing.JScrollPane();
         taListaMedElever = new javax.swing.JTextArea();
 
         setBorder(null);
@@ -53,7 +53,7 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
 
         taListaMedElever.setColumns(20);
         taListaMedElever.setRows(5);
-        jScrollPane2.setViewportView(taListaMedElever);
+        spElevhemmensElever.setViewportView(taListaMedElever);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,7 +66,7 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
                     .addComponent(tfFraga)
                     .addComponent(tfElevhemSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spElevhemmensElever, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -74,7 +74,7 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                    .addComponent(spElevhemmensElever)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfFraga)
                         .addGap(27, 27, 27)
@@ -94,7 +94,7 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane spElevhemmensElever;
     private javax.swing.JTextArea taListaMedElever;
     private javax.swing.JTextField tfElevhemSok;
     private javax.swing.JLabel tfFraga;
