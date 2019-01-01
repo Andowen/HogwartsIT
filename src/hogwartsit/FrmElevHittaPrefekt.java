@@ -5,6 +5,7 @@
  */
 package hogwartsit;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -37,6 +38,7 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
         tfSokRuta = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
         tfTest = new javax.swing.JTextField();
+        skrivUt = new javax.swing.JLabel();
 
         jLabel1.setText("För vilket elevhem vill du veta vem som är prefekt?");
 
@@ -51,20 +53,27 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
 
         tfTest.setColumns(10);
 
+        skrivUt.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfSokRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSok))
-                        .addGap(50, 50, 50)
-                        .addComponent(tfTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfSokRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSok))
+                                .addGap(50, 50, 50)
+                                .addComponent(tfTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(skrivUt)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,7 +87,9 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
                     .addComponent(tfTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(btnSok)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(skrivUt)
+                .addGap(69, 69, 69))
         );
 
         pack();
@@ -88,10 +99,17 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
       
         try {
             String indata = tfSokRuta.getText(); //Lägger in det i sökrutan i varialbeln indata.
+<<<<<<< HEAD
+            String prefektnummer = "Select prefekt from elevhem where elevhemsnamn = " + indata; //Hämtar prefektens IDnr i databasen och blir en String.
+            String idNr = idb.fetchSingle(prefektnummer);
+             // int i = Integer.parseInt(idNr); //Gör om IDnr till int.
+            String fraga = "SELECT fornamn from elev where elev_id=" + idNr; //Hämtar elevens namn med hjälp av IDnr.
+=======
             String prefektnummer = "Select prefekt from elevhem where elevhemsnamn=" + "\'" + indata + "\'"; //Hämtar prefektens IDnr i databasen och blir en String.
             String idNr = idb.fetchSingle(prefektnummer); 
             int i = Integer.parseInt(idNr); //Gör om IDnr till int.
             String fraga = "SELECT fornamn from elev where elev_id=" + i; //Hämtar elevens namn med hjälp av IDnr.
+>>>>>>> c47d4d964981e196d5d591abffd6b8a5f142df79
             String svar = idb.fetchSingle(fraga);
             tfTest.setText(svar);
         } 
@@ -104,6 +122,7 @@ public class FrmElevHittaPrefekt extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel skrivUt;
     private javax.swing.JTextField tfSokRuta;
     private javax.swing.JTextField tfTest;
     // End of variables declaration//GEN-END:variables
