@@ -145,12 +145,18 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Redigera elev"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmLarareRedigeraElevActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ta bort elev"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -163,11 +169,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Registrera kursbetyg"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmLarareRegistreraKursbetygActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mnuItmLarareAndraKursbetyg">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#xc4;ndra kursbetyg"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmLarareAndraKursbetygActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -180,11 +192,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Registrera huspo&#xe4;ng"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmLarareRegistreraHuspoangActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mnuItmLarareDraAvHuspoang">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Dra av huspo&#xe4;ng"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmLarareDraAvHuspoangActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -192,6 +210,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Byt l&#xf6;senord"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmLarareBytLosenordActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

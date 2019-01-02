@@ -19,17 +19,22 @@ import org.seamless.swing.ClosableTabbedPane;
 public class HuvudFonster extends javax.swing.JFrame {
 
     private static InfDB idb;
+    private ClosableTabbedPane paneHuvudfonsterFlikar;
     private FrmLoggaIn frmLoggaIn;
+    private FrmAdminTaBortElev frmAdminTaBortElev;
     private FrmElevElevhemLista frmElevElevhemslista;
     private FrmElevElevhemsPokal frmElevElevhemsPokal;
-    private FrmElevKursSokElev frmElevKurser;
-    private FrmElevSokBetyg frmElevBetyg;
-    private FrmElevKursSokLarare frmElevLarare;
     private FrmElevHittaPrefekt frmElevHittaPrefekt;
-    private ClosableTabbedPane paneHuvudfonsterFlikar;
+    private FrmElevKursSokElev frmElevKurser;
+    private FrmElevKursSokLarare frmElevLarare;
+    private FrmElevSokBetyg frmElevBetyg;
+    private FrmLarareAndraKursbetyg frmLarareAndraKursbetyg;
+    private FrmLarareBytLosenord frmLarareBytLosenord;
+    private FrmLarareDraAvHuspoang frmLarareDraAvHuspoang;
     private FrmLarareElevinfoNyregistreraElev frmLarareNyregElev;
-    
-
+    private FrmLarareRedigeraElev frmLarareRedigeraElev;
+    private FrmLarareRegistreraHuspoang frmLarareRegistreraHuspoang;
+    private FrmLarareRegistreraKursbetyg frmLarareRegistreraKursbetyg;
     
     /**
      * Creates new form TestFönster
@@ -199,10 +204,20 @@ public class HuvudFonster extends javax.swing.JFrame {
         mnuItmLarareElevinfo.add(mnuItmLarareNyregElev);
 
         mnuItmLarareRedigeraElev.setText("Redigera elev");
+        mnuItmLarareRedigeraElev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmLarareRedigeraElevActionPerformed(evt);
+            }
+        });
         mnuItmLarareElevinfo.add(mnuItmLarareRedigeraElev);
 
         jMenuItem1.setText("Ta bort elev");
         jMenuItem1.setEnabled(false);
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         mnuItmLarareElevinfo.add(jMenuItem1);
 
         mnuLarare.add(mnuItmLarareElevinfo);
@@ -211,9 +226,19 @@ public class HuvudFonster extends javax.swing.JFrame {
         mnuItmLarareBetyg.setText("Kursbetyg");
 
         mnuItmLarareRegistreraKursbetyg.setText("Registrera kursbetyg");
+        mnuItmLarareRegistreraKursbetyg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmLarareRegistreraKursbetygActionPerformed(evt);
+            }
+        });
         mnuItmLarareBetyg.add(mnuItmLarareRegistreraKursbetyg);
 
         mnuItmLarareAndraKursbetyg.setText("Ändra kursbetyg");
+        mnuItmLarareAndraKursbetyg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmLarareAndraKursbetygActionPerformed(evt);
+            }
+        });
         mnuItmLarareBetyg.add(mnuItmLarareAndraKursbetyg);
 
         mnuLarare.add(mnuItmLarareBetyg);
@@ -221,14 +246,29 @@ public class HuvudFonster extends javax.swing.JFrame {
         mnuItmLarareElevhem.setText("Elevhemspoäng");
 
         mnuItmLarareRegistreraHuspoang.setText("Registrera huspoäng");
+        mnuItmLarareRegistreraHuspoang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmLarareRegistreraHuspoangActionPerformed(evt);
+            }
+        });
         mnuItmLarareElevhem.add(mnuItmLarareRegistreraHuspoang);
 
         mnuItmLarareDraAvHuspoang.setText("Dra av huspoäng");
+        mnuItmLarareDraAvHuspoang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmLarareDraAvHuspoangActionPerformed(evt);
+            }
+        });
         mnuItmLarareElevhem.add(mnuItmLarareDraAvHuspoang);
 
         mnuLarare.add(mnuItmLarareElevhem);
 
         mnuItmLarareBytLosenord.setText("Byt lösenord");
+        mnuItmLarareBytLosenord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmLarareBytLosenordActionPerformed(evt);
+            }
+        });
         mnuLarare.add(mnuItmLarareBytLosenord);
 
         mnuHuvudMeny.add(mnuLarare);
@@ -440,6 +480,97 @@ public class HuvudFonster extends javax.swing.JFrame {
             flyttaFokusTillFlik("Nyregistrera en elev");
         }
     }//GEN-LAST:event_mnuItmLarareNyregElevActionPerformed
+
+    private void mnuItmLarareRedigeraElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareRedigeraElevActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmLarareRedigeraElev == null || !frmLarareRedigeraElev.isShowing()) {
+           frmLarareRedigeraElev = new FrmLarareRedigeraElev(idb);
+            oppnaFlik(frmLarareRedigeraElev, "Redigera en elev");
+            }
+        
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Redigera en elev");
+        }
+    }//GEN-LAST:event_mnuItmLarareRedigeraElevActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmAdminTaBortElev == null || !frmAdminTaBortElev.isShowing()) {
+           frmAdminTaBortElev = new FrmAdminTaBortElev(idb);
+            oppnaFlik(frmAdminTaBortElev, "Ta bort elev");
+            }
+        
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Ta bort elev");
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnuItmLarareRegistreraKursbetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareRegistreraKursbetygActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmLarareRegistreraKursbetyg == null || !frmLarareRegistreraKursbetyg.isShowing()) {
+           frmLarareRegistreraKursbetyg = new FrmLarareRegistreraKursbetyg(idb);
+            oppnaFlik(frmLarareRegistreraKursbetyg, "Registrera kursbetyg");
+            }
+        
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Registrera kursbetyg");
+        }
+    }//GEN-LAST:event_mnuItmLarareRegistreraKursbetygActionPerformed
+
+    private void mnuItmLarareAndraKursbetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareAndraKursbetygActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmLarareAndraKursbetyg == null || !frmLarareAndraKursbetyg.isShowing()) {
+           frmLarareAndraKursbetyg = new FrmLarareAndraKursbetyg(idb);
+            oppnaFlik(frmLarareAndraKursbetyg, "Ändra kursbetyg");
+            }
+        
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Ändra kursbetyg");
+        }
+    }//GEN-LAST:event_mnuItmLarareAndraKursbetygActionPerformed
+
+    private void mnuItmLarareRegistreraHuspoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareRegistreraHuspoangActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmLarareRegistreraHuspoang == null || !frmLarareRegistreraHuspoang.isShowing()) {
+           frmLarareRegistreraHuspoang = new FrmLarareRegistreraHuspoang(idb);
+            oppnaFlik(frmLarareRegistreraHuspoang, "Registrera huspoäng");
+            }
+        
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Registrera huspoäng");
+        }
+    }//GEN-LAST:event_mnuItmLarareRegistreraHuspoangActionPerformed
+
+    private void mnuItmLarareDraAvHuspoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareDraAvHuspoangActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmLarareDraAvHuspoang == null || !frmLarareDraAvHuspoang.isShowing()) {
+           frmLarareDraAvHuspoang = new FrmLarareDraAvHuspoang(idb);
+            oppnaFlik(frmLarareDraAvHuspoang, "Dra av huspoäng");
+            }
+        
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Dra av huspoäng");
+        }
+    }//GEN-LAST:event_mnuItmLarareDraAvHuspoangActionPerformed
+
+    private void mnuItmLarareBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareBytLosenordActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmLarareBytLosenord == null || !frmLarareBytLosenord.isShowing()) {
+           frmLarareBytLosenord = new FrmLarareBytLosenord(idb);
+            oppnaFlik(frmLarareBytLosenord, "Lösenordsbyte");
+            }
+        
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Lösenordsbyte");
+        }
+    }//GEN-LAST:event_mnuItmLarareBytLosenordActionPerformed
 
 
 
