@@ -27,6 +27,7 @@ public class HuvudFonster extends javax.swing.JFrame {
     private FrmElevKursSokLarare frmElevLarare;
     private FrmElevHittaPrefekt frmElevHittaPrefekt;
     private ClosableTabbedPane paneHuvudfonsterFlikar;
+    private FrmLarareElevinfoNyregistreraElev frmLarareNyregElev;
     
 
     
@@ -190,6 +191,11 @@ public class HuvudFonster extends javax.swing.JFrame {
         mnuItmLarareElevinfo.setText("Elevinformation");
 
         mnuItmLarareNyregElev.setText("Nyregistrera elev");
+        mnuItmLarareNyregElev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmLarareNyregElevActionPerformed(evt);
+            }
+        });
         mnuItmLarareElevinfo.add(mnuItmLarareNyregElev);
 
         mnuItmLarareRedigeraElev.setText("Redigera elev");
@@ -421,6 +427,19 @@ public class HuvudFonster extends javax.swing.JFrame {
             flyttaFokusTillFlik("Sök lärare för kurs");
         }
     }//GEN-LAST:event_mnuItmKursSokLarareActionPerformed
+
+    private void mnuItmLarareNyregElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareNyregElevActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(frmLarareNyregElev == null || !frmLarareNyregElev.isShowing()) {
+           frmLarareNyregElev = new FrmLarareElevinfoNyregistreraElev(idb);
+            oppnaFlik(frmLarareNyregElev, "Nyregistrera en elev");
+            }
+        
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Nyregistrera en elev");
+        }
+    }//GEN-LAST:event_mnuItmLarareNyregElevActionPerformed
 
 
 
