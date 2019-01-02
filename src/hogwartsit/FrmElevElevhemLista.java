@@ -55,6 +55,7 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
 
         tfElevhemSok.setColumns(10);
 
+        taListaMedElever.setEditable(false);
         taListaMedElever.setColumns(20);
         taListaMedElever.setRows(5);
         spElevhemmensElever.setViewportView(taListaMedElever);
@@ -102,8 +103,8 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
             try {
                 //Hämtar förnamn och efternamn på eleverna i det önskade elevhemmet.
                 ArrayList<HashMap<String, String>> resultat = idb.fetchRows("SELECT fornamn, efternamn FROM Elev \n" + 
-                        "JOIN sovsal ON Sovsal_ID = Sovsal \n" + ""
-                        + "JOIN elevhem ON Elevhem_ID = Elevhem \n" +
+                        "JOIN sovsal ON Sovsal_ID = Sovsal \n" +
+                        "JOIN elevhem ON Elevhem_ID = Elevhem \n" +
                         "WHERE Elevhemsnamn = \'" + elevhem + "\'");
                 //Kontrollerar att resultatet inte är null.
                 if (resultat != null) {
