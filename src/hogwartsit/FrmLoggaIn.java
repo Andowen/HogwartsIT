@@ -19,7 +19,6 @@ public class FrmLoggaIn extends javax.swing.JFrame {
     private static InfDB idb;
     private boolean arInloggad = false;
     private boolean arAdmin = false;
-    private Validering validering;
     
     /**
      * Creates new form FrmLoggaIn2
@@ -129,7 +128,7 @@ public class FrmLoggaIn extends javax.swing.JFrame {
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         //Validerar inloggningen och stänger sedan fönstret
         //Kontrollerar att textfälten inte är tomma.
-        if (validering.textfaltHarVarde(tfAnvandarnamn) && validering.textfaltHarVarde(tfLosenord)){
+        if (Validering.textfaltHarVarde(tfAnvandarnamn) && Validering.textfaltHarVarde(tfLosenord)){
             // Hämtar texten i textfältet användarnamn, splittar strängen vid mellanslag och skapar en array av strängar.
             String[] anvandarNamnet = tfAnvandarnamn.getText().trim().split("\\s+");
             // Hämtar lösenordet och konverterar det till en sträng.
@@ -160,9 +159,11 @@ public class FrmLoggaIn extends javax.swing.JFrame {
                     }
                 } 
                 catch (InfException ettUndantag) {
+                    ettUndantag.getMessage();
                     JOptionPane.showMessageDialog(null, "Felaktigt användarnamn.");
                 }
                 catch (NullPointerException ettAnnatUndantag) {
+                    ettAnnatUndantag.getMessage();
                     JOptionPane.showMessageDialog(null, "Felaktigt användarnamn.");
                 }
                     

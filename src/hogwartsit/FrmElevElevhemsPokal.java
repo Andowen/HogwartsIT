@@ -5,6 +5,9 @@
  */
 package hogwartsit;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
@@ -16,7 +19,7 @@ public class FrmElevElevhemsPokal extends javax.swing.JInternalFrame {
     private static InfDB idb;
     
     /**
-     * Creates new form FrmTest2
+     * Creates new form FrmElevElevhemsPokal
      */
     public FrmElevElevhemsPokal(InfDB idb) {
         initComponents();
@@ -32,33 +35,24 @@ public class FrmElevElevhemsPokal extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        tfTredjeRutan = new javax.swing.JTextField();
-        tfFjardeRutan = new javax.swing.JTextField();
-        tfAndraRutan = new javax.swing.JTextField();
-        tfForstaRutan = new javax.swing.JTextField();
+        lblSeStallning = new javax.swing.JLabel();
+        spAktuellStallning = new javax.swing.JScrollPane();
+        taAktuellStallning = new javax.swing.JTextArea();
+        btnSok = new javax.swing.JButton();
 
-        jLabel1.setText("Ställningen i elevhemspokalen:");
+        lblSeStallning.setText("Se aktuell ställning i elevhemspokalen:");
 
-        jLabel2.setText("1.");
+        taAktuellStallning.setEditable(false);
+        taAktuellStallning.setColumns(20);
+        taAktuellStallning.setRows(5);
+        spAktuellStallning.setViewportView(taAktuellStallning);
 
-        jLabel3.setText("2.");
-
-        jLabel4.setText("3.");
-
-        jLabel5.setText("4.");
-
-        tfTredjeRutan.setColumns(10);
-
-        tfFjardeRutan.setColumns(10);
-
-        tfAndraRutan.setColumns(10);
-
-        tfForstaRutan.setColumns(10);
+        btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,60 +60,59 @@ public class FrmElevElevhemsPokal extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tfFjardeRutan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3))
-                            .addGap(31, 31, 31)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfAndraRutan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfTredjeRutan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfForstaRutan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(spAktuellStallning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSeStallning)
+                    .addComponent(btnSok))
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addComponent(lblSeStallning)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfForstaRutan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(spAktuellStallning, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfAndraRutan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfTredjeRutan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfFjardeRutan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(btnSok)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        //Lokal variabel för att visa aktuell position för elevhemmet.
+        int stallning = 0;
+        //Tömmer textrutan från eventuell tidigare text
+        taAktuellStallning.setText("");
+        
+        try {
+            //Hämtar elevhemsnamn och huspoäng, och sorterar elevhemmen i fallande ordning efter antal huspoäng.
+            ArrayList<HashMap<String, String>> resultat = idb.fetchRows("SELECT elevhemsnamn, huspoang FROM Elevhem \n" +
+                    "ORDER BY huspoang DESC");
+            //Loopar igenom ArrayListen och hämtar elevhemsnamn och huspoäng för varje elevhem i ArrayListens HashMap
+            for (int i = 0; i < resultat.size(); i++) {
+                String elevhemsNamn = resultat.get(i).get("ELEVHEMSNAMN");
+                String husPoang = resultat.get(i).get("HUSPOANG");
+                //För varje iteration ökar värdet på variablen stallningen med 1.
+                stallning ++;
+                //Lägger till ställning, elevhemsnamn och huspoäng i textrutan.
+                taAktuellStallning.append(stallning + ". " + elevhemsNamn + ", " + husPoang + " poäng.\n");
+            }
+        }
+        
+        catch (InfException ettUndantag) {
+            ettUndantag.getMessage();
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+        }
+    }//GEN-LAST:event_btnSokActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField tfAndraRutan;
-    private javax.swing.JTextField tfFjardeRutan;
-    private javax.swing.JTextField tfForstaRutan;
-    private javax.swing.JTextField tfTredjeRutan;
+    private javax.swing.JButton btnSok;
+    private javax.swing.JLabel lblSeStallning;
+    private javax.swing.JScrollPane spAktuellStallning;
+    private javax.swing.JTextArea taAktuellStallning;
     // End of variables declaration//GEN-END:variables
 }

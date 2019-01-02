@@ -5,8 +5,12 @@
  */
 package hogwartsit;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+
 /**
  *
  * @author Anna Svensson och Ellinor Danielsson
@@ -51,6 +55,7 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
 
         tfElevhemSok.setColumns(10);
 
+        taListaMedElever.setEditable(false);
         taListaMedElever.setColumns(20);
         taListaMedElever.setRows(5);
         spElevhemmensElever.setViewportView(taListaMedElever);
@@ -88,7 +93,47 @@ public class FrmElevElevhemLista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
-        // TODO add your handling code here:
+        // Kontrollerar att textfältet inte är tomt.
+        if (Validering.textfaltHarVarde(tfElevhemSok)) {
+            //Hämtar strängen från textfältet.
+            String elevhem = tfElevhemSok.getText();
+            //Tömmer textrutan från text.
+            taListaMedElever.setText("");
+            
+            try {
+                //Hämtar förnamn och efternamn på eleverna i det önskade elevhemmet.
+                ArrayList<HashMap<String, String>> resultat = idb.fetchRows("SELECT fornamn, efternamn FROM Elev \n" + 
+                        "JOIN sovsal ON Sovsal_ID = Sovsal \n" +
+                        "JOIN elevhem ON Elevhem_ID = Elevhem \n" +
+                        "WHERE Elevhemsnamn = \'" + elevhem + "\'");
+                //Kontrollerar att resultatet inte är null.
+                if (resultat != null) {
+                    
+                    //Loopar igenom ArrayListen och hämtar förnamn och efternamn för varje elev i ArrayListens HashMap.
+                    for (int i = 0; i < resultat.size(); i++) {
+                        String fornamn = resultat.get(i).get("FORNAMN");
+                        String efternamn = resultat.get(i).get("EFTERNAMN");
+                        //Kontrollerar att variablerna fornamn och efternamn inte är null.
+                        if (fornamn != null && efternamn != null) {
+                            //Lägger till förnamn och efternamn i textrutan.
+                            taListaMedElever.append(fornamn + " " + efternamn + "\n");
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, "Det finns inga elever i elevhemmet");
+                        }
+                    }
+                }
+                else {
+                JOptionPane.showMessageDialog(null, "Det finns inget elevhem med det namnet.");  
+                }
+            
+            }
+            
+            catch (InfException ettUndantag) {
+                ettUndantag.getMessage();
+                JOptionPane.showMessageDialog(null, "Något gick fel!");
+            }
+        }
     }//GEN-LAST:event_btnSokActionPerformed
 
 

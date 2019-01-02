@@ -383,7 +383,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmElevSokBetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevSokBetygActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevBetyg == null || !frmElevBetyg.isShowing()) {
+        if(frmElevBetyg == null || !frmElevBetyg.isEnabled()) {
            frmElevBetyg = new FrmElevSokBetyg(idb);
             oppnaFlik(frmElevBetyg, "Sök betyg");
             }
@@ -405,7 +405,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmListaEleverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmListaEleverActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevElevhemslista == null || !frmElevElevhemslista.isShowing()) {
+        if(frmElevElevhemslista == null || !frmElevElevhemslista.isEnabled()) {
            frmElevElevhemslista = new FrmElevElevhemLista(idb);
             oppnaFlik(frmElevElevhemslista, "Elevhemslista");
             }
@@ -418,7 +418,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmElevhemsPokalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevhemsPokalActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevElevhemsPokal == null || !frmElevElevhemsPokal.isShowing()) {
+        if(frmElevElevhemsPokal == null || !frmElevElevhemsPokal.isEnabled()) {
            frmElevElevhemsPokal = new FrmElevElevhemsPokal(idb);
             oppnaFlik(frmElevElevhemsPokal, "Ställning elevhemspokalen");
             }
@@ -431,7 +431,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmHittaPrefektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmHittaPrefektActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevHittaPrefekt == null || !frmElevHittaPrefekt.isShowing()) {
+        if(frmElevHittaPrefekt == null || !frmElevHittaPrefekt.isEnabled()) {
            frmElevHittaPrefekt = new FrmElevHittaPrefekt(idb);
             oppnaFlik(frmElevHittaPrefekt, "Hitta prefekt");
             }
@@ -444,7 +444,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmKursSokElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmKursSokElevActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevKurser == null || !frmElevKurser.isShowing()) {
+        if(frmElevKurser == null || !frmElevKurser.isEnabled()) {
            frmElevKurser = new FrmElevKursSokElev(idb);
             oppnaFlik(frmElevKurser, "Sök kurs för elev");
             }
@@ -457,7 +457,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmKursSokLarareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmKursSokLarareActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevLarare == null || !frmElevLarare.isShowing()) {
+        if(frmElevLarare == null || !frmElevLarare.isEnabled()) {
            frmElevLarare = new FrmElevKursSokLarare(idb);
             oppnaFlik(frmElevLarare, "Sök lärare för kurs");
             }
@@ -470,7 +470,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmLarareNyregElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareNyregElevActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmLarareNyregElev == null || !frmLarareNyregElev.isShowing()) {
+        if(frmLarareNyregElev == null || !frmLarareNyregElev.isEnabled()) {
            frmLarareNyregElev = new FrmLarareElevinfoNyregistreraElev(idb);
             oppnaFlik(frmLarareNyregElev, "Nyregistrera en elev");
             }
@@ -483,7 +483,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmLarareRedigeraElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareRedigeraElevActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmLarareRedigeraElev == null || !frmLarareRedigeraElev.isShowing()) {
+        if(frmLarareRedigeraElev == null || !frmLarareRedigeraElev.isEnabled()) {
            frmLarareRedigeraElev = new FrmLarareRedigeraElev(idb);
             oppnaFlik(frmLarareRedigeraElev, "Redigera en elev");
             }
@@ -496,7 +496,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmAdminTaBortElev == null || !frmAdminTaBortElev.isShowing()) {
+        if(frmAdminTaBortElev == null || !frmAdminTaBortElev.isEnabled()) {
            frmAdminTaBortElev = new FrmAdminTaBortElev(idb);
             oppnaFlik(frmAdminTaBortElev, "Ta bort elev");
             }
@@ -509,7 +509,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmLarareRegistreraKursbetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareRegistreraKursbetygActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmLarareRegistreraKursbetyg == null || !frmLarareRegistreraKursbetyg.isShowing()) {
+        if(frmLarareRegistreraKursbetyg == null || !frmLarareRegistreraKursbetyg.isEnabled()) {
            frmLarareRegistreraKursbetyg = new FrmLarareRegistreraKursbetyg(idb);
             oppnaFlik(frmLarareRegistreraKursbetyg, "Registrera kursbetyg");
             }
@@ -522,7 +522,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmLarareAndraKursbetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareAndraKursbetygActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmLarareAndraKursbetyg == null || !frmLarareAndraKursbetyg.isShowing()) {
+        if(frmLarareAndraKursbetyg == null || !frmLarareAndraKursbetyg.isEnabled()) {
            frmLarareAndraKursbetyg = new FrmLarareAndraKursbetyg(idb);
             oppnaFlik(frmLarareAndraKursbetyg, "Ändra kursbetyg");
             }
@@ -535,7 +535,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmLarareRegistreraHuspoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareRegistreraHuspoangActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmLarareRegistreraHuspoang == null || !frmLarareRegistreraHuspoang.isShowing()) {
+        if(frmLarareRegistreraHuspoang == null || !frmLarareRegistreraHuspoang.isEnabled()) {
            frmLarareRegistreraHuspoang = new FrmLarareRegistreraHuspoang(idb);
             oppnaFlik(frmLarareRegistreraHuspoang, "Registrera huspoäng");
             }
@@ -548,7 +548,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmLarareDraAvHuspoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareDraAvHuspoangActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmLarareDraAvHuspoang == null || !frmLarareDraAvHuspoang.isShowing()) {
+        if(frmLarareDraAvHuspoang == null || !frmLarareDraAvHuspoang.isEnabled()) {
            frmLarareDraAvHuspoang = new FrmLarareDraAvHuspoang(idb);
             oppnaFlik(frmLarareDraAvHuspoang, "Dra av huspoäng");
             }
@@ -561,7 +561,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmLarareBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareBytLosenordActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmLarareBytLosenord == null || !frmLarareBytLosenord.isShowing()) {
+        if(frmLarareBytLosenord == null || !frmLarareBytLosenord.isEnabled()) {
            frmLarareBytLosenord = new FrmLarareBytLosenord(idb);
             oppnaFlik(frmLarareBytLosenord, "Lösenordsbyte");
             }
