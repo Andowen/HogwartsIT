@@ -5,6 +5,9 @@
  */
 package hogwartsit;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
@@ -46,6 +49,11 @@ public class FrmElevKursSokElev extends javax.swing.JInternalFrame {
         jLabel2.setText("Elevens namn:");
 
         btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
 
         taKurser.setColumns(20);
         taKurser.setRows(5);
@@ -87,6 +95,45 @@ public class FrmElevKursSokElev extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        try{
+            //Kontrollerar att textfältet inte är tomt.
+            if(Validering.textfaltHarVarde(tfSokRuta)){
+                // Hämtar texten i textfältet SokRuta, splittar strängen vid mellanslag och skapar en array av strängar.
+                String[] elevNamnet = tfSokRuta.getText().trim().split("\\s+");
+                String forNamn = elevNamnet[0];
+                String efterNamn = elevNamnet[1]; 
+                // Hämtar kurser som en elev varit registrerad på.
+                 ArrayList<HashMap<String, String>> resultat = idb.fetchRows("SELECT kursnamn FROM Kurs\n" +
+                    "JOIN Har_betyg_i ON Har_betyg_i.Kurs_ID = Kurs.Kurs_ID \n" +
+                    "JOIN Elev ON Elev.Elev_ID = Har_betyg_i.Elev_ID \n" +
+                    "WHERE Fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'");
+                    //Kontrollerar att resultatet inte är null.
+                    if(resultat != null) {
+                        //Loopar genom ArrayListen och hämtar kursnamnen för varje kurs i ArrayListens HashMap.
+                        for(int i = 0; i <resultat.size(); i ++) {
+                        String kursNamn = resultat.get(i).get("KURSNAMN");
+                        //Kontrollerar att de inte är null.
+                        if(kursNamn != null) {
+                            //Lägger till kursnamnen i textrutan.
+                            taKurser.append(kursNamn + "\n");
+                        }
+                    else{
+                        // Felmeddelande om eleven inte är registrerad på några kurser.
+                        JOptionPane.showMessageDialog(null, "Eleven är inte registrerad på några kurser"); 
+                        }
+                    }   
+                }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Det finns ingen elev med det namnet.");
+                    }
+                }    
+            }   
+        catch(InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");   
+        }   
+    }//GEN-LAST:event_btnSokActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

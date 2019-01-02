@@ -5,6 +5,9 @@
  */
 package hogwartsit;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
@@ -46,6 +49,11 @@ public class FrmElevSokBetyg extends javax.swing.JInternalFrame {
         tfElev.setColumns(10);
 
         btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
 
         taElevensKursbetyg.setColumns(20);
         taElevensKursbetyg.setRows(5);
@@ -90,6 +98,48 @@ public class FrmElevSokBetyg extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        try{
+            //Kontrollerar att textfältet inte är tomt.
+            if(Validering.textfaltHarVarde(tfElev)){
+                // Hämtar texten i textfältet Elev, splittar strängen vid mellanslag och skapar en array av strängar.
+                String[] elevNamnet = tfElev.getText().trim().split("\\s+");
+                String forNamn = elevNamnet[0];
+                String efterNamn = elevNamnet[1];
+                // Hämtar elevens elev ID.
+                String id = "SELECT elev_id FROM elev WHERE fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'";
+                String elevID = idb.fetchSingle(id); 
+                int idNr = Integer.parseInt(elevID); //Gör om IDnr till int.
+                //Hämtar kursbetyg och kursnamn.
+                ArrayList<HashMap<String, String>> resultat = idb.fetchRows("SELECT kursbetyg, kursnamn FROM har_betyg_i, kurs WHERE har_betyg_i.kurs_id = kurs.kurs_id and elev_id =" + idNr);
+                //Kontrollerar att resultatet inte är null.
+                if(resultat != null){
+                    //Loopar genom ArrayListen och hämtar kursnamnen och kursbetygen i ArrayListens HashMap.
+                    for(int i = 0; i < resultat.size(); i++) {
+                        String betyg = resultat.get(i).get("KURSBETYG");
+                        String kurs = resultat.get(i).get("KURSNAMN");
+                        //Kontrollerar att de inte är null.
+                        if(kurs!= null && betyg != null){
+                            //Lägger till kursens namn och elevens betyg i rextrutan.
+                            taElevensKursbetyg.append(kurs + " " + betyg + "\n");
+                        }
+                    else{
+                            //Felmeddelande om eleven inte har några betyg än.
+                            JOptionPane.showMessageDialog(null, "Eleven har inga betyg än.");
+                        }
+                    }
+                }  
+                else{
+                    //Felmeddelande om det inte finns någon elev med namnet som användaren har skrivit in.
+                    JOptionPane.showMessageDialog(null, "Det finns ingen elev med det namnet.");
+                }
+            } 
+        }   
+        catch(InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");   
+        }   
+    }//GEN-LAST:event_btnSokActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
@@ -100,3 +150,4 @@ public class FrmElevSokBetyg extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfElev;
     // End of variables declaration//GEN-END:variables
 }
+
