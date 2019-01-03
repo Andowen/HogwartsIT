@@ -5,6 +5,8 @@
  */
 package hogwartsit;
 
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -22,6 +24,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     public FrmLarareRedigeraElev(InfDB idb) {
         initComponents();
         this.idb = idb;
+        pnlAndraElev.setVisible(false);
     }
 
     /**
@@ -33,21 +36,185 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblSokElev = new javax.swing.JLabel();
+        tfNamnFalt = new javax.swing.JTextField();
+        btnSok = new javax.swing.JButton();
+        pnlAndraElev = new javax.swing.JPanel();
+        tfFornamn = new javax.swing.JTextField();
+        tfEfternamn = new javax.swing.JTextField();
+        tfSovsal = new javax.swing.JTextField();
+        lblFornamn = new javax.swing.JLabel();
+        lblEfternamn = new javax.swing.JLabel();
+        lblSovsal = new javax.swing.JLabel();
+        lblGorAndringar = new javax.swing.JLabel();
+        btnAvbryt = new javax.swing.JButton();
+        btnSkickaAndring = new javax.swing.JButton();
+
+        lblSokElev.setText("Sök elev att redigera:");
+
+        btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
+
+        pnlAndraElev.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        tfEfternamn.setColumns(5);
+
+        lblFornamn.setText("Förnamn:");
+
+        lblEfternamn.setText("Efternamn:");
+
+        lblSovsal.setText("Sovsal:");
+
+        lblGorAndringar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblGorAndringar.setText("Gör ändringar direkt i fälten nedan.");
+
+        btnAvbryt.setText("Avbryt");
+        btnAvbryt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvbrytActionPerformed(evt);
+            }
+        });
+
+        btnSkickaAndring.setText("Skicka ändringar");
+
+        javax.swing.GroupLayout pnlAndraElevLayout = new javax.swing.GroupLayout(pnlAndraElev);
+        pnlAndraElev.setLayout(pnlAndraElevLayout);
+        pnlAndraElevLayout.setHorizontalGroup(
+            pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAndraElevLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAndraElevLayout.createSequentialGroup()
+                        .addComponent(btnSkickaAndring)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAvbryt))
+                    .addGroup(pnlAndraElevLayout.createSequentialGroup()
+                        .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblGorAndringar)
+                            .addGroup(pnlAndraElevLayout.createSequentialGroup()
+                                .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlAndraElevLayout.createSequentialGroup()
+                                        .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAndraElevLayout.createSequentialGroup()
+                                        .addComponent(lblFornamn)
+                                        .addGap(90, 90, 90)))
+                                .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEfternamn)
+                                    .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSovsal)
+                            .addComponent(tfSovsal, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        pnlAndraElevLayout.setVerticalGroup(
+            pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAndraElevLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblGorAndringar)
+                .addGap(18, 18, 18)
+                .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEfternamn)
+                    .addComponent(lblFornamn)
+                    .addComponent(lblSovsal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSovsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAndraElevLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAvbryt)
+                    .addComponent(btnSkickaAndring))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSokElev)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfNamnFalt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(btnSok))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(pnlAndraElev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSokElev)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfNamnFalt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSok))
+                .addGap(29, 29, 29)
+                .addComponent(pnlAndraElev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        if (Validering.textfaltHarVarde(tfNamnFalt)) {
+            String[] elevNamnet = tfNamnFalt.getText().trim().split("\\s+");
+            String forNamn = elevNamnet[0];
+            String efterNamn = elevNamnet[1];
+            try {
+                HashMap<String, String> resultat = idb.fetchRow("SELECT fornamn, efternamn, sovsal FROM elev WHERE fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'");
+                tfFornamn.setText(resultat.get("FORNAMN"));
+                tfEfternamn.setText(resultat.get("EFTERNAMN"));
+                tfSovsal.setText(resultat.get("SOVSAL"));
+                pnlAndraElev.setVisible(true);             
+            }
+            
+            catch (InfException ettUndantag) {
+                ettUndantag.getMessage();
+                JOptionPane.showMessageDialog(null, "Något gick fel!");
+            }
+        }
+    }//GEN-LAST:event_btnSokActionPerformed
+
+    private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
+        tfNamnFalt.setText("");
+        tfFornamn.setText("");
+        tfEfternamn.setText("");
+        tfSovsal.setText("");
+        pnlAndraElev.setVisible(false);
+        
+    }//GEN-LAST:event_btnAvbrytActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAvbryt;
+    private javax.swing.JButton btnSkickaAndring;
+    private javax.swing.JButton btnSok;
+    private javax.swing.JLabel lblEfternamn;
+    private javax.swing.JLabel lblFornamn;
+    private javax.swing.JLabel lblGorAndringar;
+    private javax.swing.JLabel lblSokElev;
+    private javax.swing.JLabel lblSovsal;
+    private javax.swing.JPanel pnlAndraElev;
+    private javax.swing.JTextField tfEfternamn;
+    private javax.swing.JTextField tfFornamn;
+    private javax.swing.JTextField tfNamnFalt;
+    private javax.swing.JTextField tfSovsal;
     // End of variables declaration//GEN-END:variables
 }
