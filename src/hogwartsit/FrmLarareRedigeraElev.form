@@ -90,7 +90,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnSkickaAndring" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSparaAndring" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnAvbryt" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -148,7 +148,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAvbryt" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSkickaAndring" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSparaAndring" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -196,10 +196,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvbrytActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSkickaAndring">
+        <Component class="javax.swing.JButton" name="btnSparaAndring">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Skicka &#xe4;ndringar"/>
+            <Property name="text" type="java.lang.String" value="Spara &#xe4;ndringar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSparaAndringActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

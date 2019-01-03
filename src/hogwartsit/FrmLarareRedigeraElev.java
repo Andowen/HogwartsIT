@@ -17,6 +17,7 @@ import oru.inf.InfException;
 public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
 
     private static InfDB idb;
+    private String elevID = "";
     
     /**
      * Creates new form FrmLarareRedigeraElev
@@ -48,7 +49,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
         lblSovsal = new javax.swing.JLabel();
         lblGorAndringar = new javax.swing.JLabel();
         btnAvbryt = new javax.swing.JButton();
-        btnSkickaAndring = new javax.swing.JButton();
+        btnSparaAndring = new javax.swing.JButton();
 
         lblSokElev.setText("Sök elev att redigera:");
 
@@ -79,7 +80,12 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSkickaAndring.setText("Skicka ändringar");
+        btnSparaAndring.setText("Spara ändringar");
+        btnSparaAndring.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSparaAndringActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlAndraElevLayout = new javax.swing.GroupLayout(pnlAndraElev);
         pnlAndraElev.setLayout(pnlAndraElevLayout);
@@ -89,7 +95,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAndraElevLayout.createSequentialGroup()
-                        .addComponent(btnSkickaAndring)
+                        .addComponent(btnSparaAndring)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAvbryt))
                     .addGroup(pnlAndraElevLayout.createSequentialGroup()
@@ -132,7 +138,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlAndraElevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvbryt)
-                    .addComponent(btnSkickaAndring))
+                    .addComponent(btnSparaAndring))
                 .addContainerGap())
         );
 
@@ -178,11 +184,19 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
             String forNamn = elevNamnet[0];
             String efterNamn = elevNamnet[1];
             try {
-                HashMap<String, String> resultat = idb.fetchRow("SELECT fornamn, efternamn, sovsal FROM elev WHERE fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'");
+                HashMap<String, String> resultat = idb.fetchRow("SELECT elev_id, fornamn, efternamn, sovsal FROM elev WHERE fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'");
                 tfFornamn.setText(resultat.get("FORNAMN"));
                 tfEfternamn.setText(resultat.get("EFTERNAMN"));
                 tfSovsal.setText(resultat.get("SOVSAL"));
-                pnlAndraElev.setVisible(true);             
+                elevID = resultat.get("ELEV_ID");
+                
+                if (tfFornamn != null && tfEfternamn !=null) {
+                    pnlAndraElev.setVisible(true);
+                }
+                
+                else {
+                    JOptionPane.showMessageDialog(null, "Det finns inget elev med det namnet!");
+                }
             }
             
             catch (InfException ettUndantag) {
@@ -197,15 +211,39 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
         tfFornamn.setText("");
         tfEfternamn.setText("");
         tfSovsal.setText("");
+        elevID = "";
         pnlAndraElev.setVisible(false);
         
     }//GEN-LAST:event_btnAvbrytActionPerformed
 
+    private void btnSparaAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringActionPerformed
+        if (Validering.textfaltHarVarde(tfFornamn) && Validering.textfaltHarVarde(tfEfternamn) && Validering.textfaltTal(tfSovsal)) {
+            String fornamn = tfFornamn.getText();
+            String efternamn = tfEfternamn.getText();
+            String sovsal = tfSovsal.getText();
+            Object[] knappar = {"Spara", "Avbryt",};
+            int arDuSaker = JOptionPane.showOptionDialog(null, "Är du säker?", "Spara ändringar för eleven", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, knappar, knappar[0]);
+
+            if (arDuSaker == 0) { 
+                try {
+                    idb.update("UPDATE Elev \n" + 
+                            "SET FORNAMN = \'" + fornamn + "\', EFTERNAMN = \'" + efternamn + "\', SOVSAL = " + sovsal + "\n" +
+                            "WHERE ELEV_ID = " + elevID);
+                }
+            
+                catch (InfException ettUndantag) {
+                    ettUndantag.getMessage();
+                    JOptionPane.showMessageDialog(null, "Något gick fel!");
+                }
+            } 
+        }
+    }//GEN-LAST:event_btnSparaAndringActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvbryt;
-    private javax.swing.JButton btnSkickaAndring;
     private javax.swing.JButton btnSok;
+    private javax.swing.JButton btnSparaAndring;
     private javax.swing.JLabel lblEfternamn;
     private javax.swing.JLabel lblFornamn;
     private javax.swing.JLabel lblGorAndringar;
