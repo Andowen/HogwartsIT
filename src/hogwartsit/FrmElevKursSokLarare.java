@@ -5,6 +5,14 @@
  */
 package hogwartsit;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
@@ -32,20 +40,17 @@ public class FrmElevKursSokLarare extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tfLarare = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        tfStartdatum = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        tfSlutdatum = new javax.swing.JTextField();
         btnSok = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         taAllaKurser = new javax.swing.JTextArea();
-
-        jLabel1.setText("Date picker-kontroll?");
+        tfStart = new javax.swing.JTextField();
+        tfSlut = new javax.swing.JTextField();
 
         jLabel2.setText("Ange lärare och datum för att få fram kurser som läraren har");
 
@@ -55,19 +60,24 @@ public class FrmElevKursSokLarare extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Lärare:");
 
-        jLabel5.setText("Startdatum:");
+        jLabel5.setText("Startdatum yyyy-mm-dd:");
 
-        tfStartdatum.setColumns(10);
-
-        jLabel6.setText("Slutdatum:");
-
-        tfSlutdatum.setColumns(10);
+        jLabel6.setText("Slutdatum yyyy-mm-dd:");
 
         btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
 
         taAllaKurser.setColumns(20);
         taAllaKurser.setRows(5);
         jScrollPane1.setViewportView(taAllaKurser);
+
+        tfStart.setColumns(10);
+
+        tfSlut.setColumns(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,69 +85,107 @@ public class FrmElevKursSokLarare extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfLarare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel5)
-                                        .addComponent(tfStartdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6))
-                                    .addGap(70, 70, 70))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfSlutdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnSok))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(tfLarare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(tfStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(btnSok)
+                            .addComponent(jLabel6)
+                            .addComponent(tfSlut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(39, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(7, 7, 7)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(3, 3, 3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfLarare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
-                        .addGap(2, 2, 2)
-                        .addComponent(tfStartdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addGap(2, 2, 2)
-                        .addComponent(tfSlutdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSok)
-                        .addGap(0, 17, Short.MAX_VALUE))
+                        .addComponent(tfStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)))
-                .addContainerGap())
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfSlut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSok)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        try {
+            // Kontrollerar att textfälten inte är tomma.
+            if (Validering.textfaltHarVarde(tfLarare)) {
+                // Hämtar texten i textfältet SokRuta, splittar strängen vid mellanslag och skapar en array av strängar.
+                String[] elevNamnet = tfLarare.getText().trim().split("\\s+");
+                String forNamn = elevNamnet[0];
+                String efterNamn = elevNamnet[1];
+                // Hämtar kurser som en lärare har/har haft och datumen för kursen.
+                ArrayList<HashMap<String, String>> resultat = idb.fetchRows("SELECT kursnamn, kursstart, kursslut FROM Kurs\n"
+                        + "JOIN Larare ON Larar_ID = Kurslarare \n"
+                        + "WHERE Fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'");
+                //Kontrollerar att resultatet inte är null.
+                if (resultat != null) {
+                    //Loopar genom ArrayListen och hämtar kursnamnen och datumen för varje kurs i ArrayListens HashMap.
+                    for (int i = 0; i < resultat.size(); i++) {
+                        String kursNamn = resultat.get(i).get("KURSNAMN");
+                        String startdatum = resultat.get(i).get("KURSSTART");
+                        String slutdatum = resultat.get(i).get("KURSSLUT");
+                        //Hämtar texterna i textfälten Slut och Start.
+                        String inputStart = tfStart.getText();
+                        String inputSlut = tfSlut.getText();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        
+                        //Kontrollerar att datumen som läraren har/har haft kurser är inom ramen för det som användaren skriver in.
+                        if (sdf.parse(inputStart).before(sdf.parse(startdatum)) && sdf.parse(inputSlut).after(sdf.parse(slutdatum))) {
+                            taAllaKurser.append(kursNamn);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Läraren har inte haft några kurser mellan de angivna datumen.");
+                        }
+
+                    }
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Fel");
+            }
+        } catch (InfException E) {
+            JOptionPane.showMessageDialog(null, "Något gick fel.");
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmElevKursSokLarare.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_btnSokActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSok;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -146,7 +194,7 @@ public class FrmElevKursSokLarare extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea taAllaKurser;
     private javax.swing.JTextField tfLarare;
-    private javax.swing.JTextField tfSlutdatum;
-    private javax.swing.JTextField tfStartdatum;
+    private javax.swing.JTextField tfSlut;
+    private javax.swing.JTextField tfStart;
     // End of variables declaration//GEN-END:variables
 }
