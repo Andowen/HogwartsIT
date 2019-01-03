@@ -17,6 +17,7 @@ import oru.inf.InfException;
 public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
 
     private static InfDB idb;
+    //Fält för att spara elevID för den aktuella eleven
     private String elevID = "";
     
     /**
@@ -25,6 +26,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     public FrmLarareRedigeraElev(InfDB idb) {
         initComponents();
         this.idb = idb;
+        //Döljer panelen för ändringar
         pnlAndraElev.setVisible(false);
     }
 
@@ -179,18 +181,25 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        //Kontrollerar att namnfältet inte är tomt.
         if (Validering.textfaltHarVarde(tfNamnFalt)) {
+            //Delar strängen som användaren skickar in i namnfältet i för- och efternamn.
             String[] elevNamnet = tfNamnFalt.getText().trim().split("\\s+");
             String forNamn = elevNamnet[0];
             String efterNamn = elevNamnet[1];
             try {
+                //Hämtar elevID, förnman, efternamn och sovsal från elevtabellen i databsen
                 HashMap<String, String> resultat = idb.fetchRow("SELECT elev_id, fornamn, efternamn, sovsal FROM elev WHERE fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'");
+                //Fyller i de hämtade värdena i textrutorna för ändringar
                 tfFornamn.setText(resultat.get("FORNAMN"));
                 tfEfternamn.setText(resultat.get("EFTERNAMN"));
                 tfSovsal.setText(resultat.get("SOVSAL"));
+                //Ger fältet elevID ett värde
                 elevID = resultat.get("ELEV_ID");
                 
+                //Kontrollerar att fälten inte är null
                 if (tfFornamn != null && tfEfternamn !=null) {
+                    //Visar panelen för ändringar, som nu har förifyllda värden med den nuvarande sparade datan.
                     pnlAndraElev.setVisible(true);
                 }
                 
@@ -207,28 +216,32 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSokActionPerformed
 
     private void btnAvbrytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvbrytActionPerformed
-        tfNamnFalt.setText("");
-        tfFornamn.setText("");
-        tfEfternamn.setText("");
-        tfSovsal.setText("");
-        elevID = "";
-        pnlAndraElev.setVisible(false);
+        //Avbryter ändringar genom att ett internt metodanrop
+        avbrytAndringar();
         
     }//GEN-LAST:event_btnAvbrytActionPerformed
 
     private void btnSparaAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringActionPerformed
+        //Kontrollerar att textfälten inte saknar värde, samt att fältet för sovsal innehåller ett heltal
         if (Validering.textfaltHarVarde(tfFornamn) && Validering.textfaltHarVarde(tfEfternamn) && Validering.textfaltTal(tfSovsal)) {
+            //Hämtar texten från textfälten, som användaren kan ha redigerat.
             String fornamn = tfFornamn.getText();
             String efternamn = tfEfternamn.getText();
             String sovsal = tfSovsal.getText();
+            //Lokal variabel som lagrar texten som ska visas på knapparna i en meddelanderuta
             Object[] knappar = {"Spara", "Avbryt",};
+            //En meddelanderuta där användaren får bekräfta som ändringarna ska sparas, som returnerar en int beroende på om användaren klickar "spara" eller "avbryt"
             int arDuSaker = JOptionPane.showOptionDialog(null, "Är du säker?", "Spara ändringar för eleven", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, knappar, knappar[0]);
 
+            //Kontrollerar att användaren har klickat "spara" i meddelandeutan
             if (arDuSaker == 0) { 
                 try {
+                    //Uppdaterar raden för den aktuella eleven, med de värden som användaren har skrivit in
                     idb.update("UPDATE Elev \n" + 
                             "SET FORNAMN = \'" + fornamn + "\', EFTERNAMN = \'" + efternamn + "\', SOVSAL = " + sovsal + "\n" +
                             "WHERE ELEV_ID = " + elevID);
+                    //Avbryter ändringar för att kräva att ett nytt elevsök sker innan nästa ändring, för att undvika användarfel.
+                    avbrytAndringar();
                 }
             
                 catch (InfException ettUndantag) {
@@ -239,6 +252,15 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSparaAndringActionPerformed
 
+    private void avbrytAndringar() {
+        //Metod som hjälper till att tömma alla textfält, fältet för elevID och döljer ändringspanelen.
+        tfNamnFalt.setText("");
+        tfFornamn.setText("");
+        tfEfternamn.setText("");
+        tfSovsal.setText("");
+        elevID = "";
+        pnlAndraElev.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvbryt;
