@@ -8,7 +8,6 @@ package hogwartsit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -141,9 +140,9 @@ public class FrmElevKursSokLarare extends javax.swing.JInternalFrame {
             // Kontrollerar att textfälten inte är tomma.
             if (Validering.textfaltHarVarde(tfLarare)) {
                 // Hämtar texten i textfältet SokRuta, splittar strängen vid mellanslag och skapar en array av strängar.
-                String[] elevNamnet = tfLarare.getText().trim().split("\\s+");
-                String forNamn = elevNamnet[0];
-                String efterNamn = elevNamnet[1];
+                String[] lararNamnet = tfLarare.getText().trim().split("\\s+");
+                String forNamn = lararNamnet[0];
+                String efterNamn = lararNamnet[1];
                 // Hämtar kurser som en lärare har/har haft och datumen för kursen.
                 ArrayList<HashMap<String, String>> resultat = idb.fetchRows("SELECT kursnamn, kursstart, kursslut FROM Kurs\n"
                         + "JOIN Larare ON Larar_ID = Kurslarare \n"
