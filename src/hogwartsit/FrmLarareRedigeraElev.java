@@ -417,26 +417,33 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAvbrytActionPerformed
 
     private void btnSparaAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaAndringActionPerformed
-
-        // TODO add your handling code here:
+        //Kontrollerar att inget textfält saknar värde
+        if (Validering.textfaltHarVarde(tfFornamn) && Validering.textfaltHarVarde(tfEfternamn)) {
+            //Lokala variabler somtilldelas innehållet av textfälten.
             String fornamn = tfFornamn.getText();
             String efternamn = tfEfternamn.getText();
+            //En array av strängar som består av delar av det valda objektet i sovsalslistan.
             String[] sovsalElevhem = cbSovsal.getSelectedItem().toString().trim().split("\\s+");
+            //Lokala variabler som ges värden av två av strängarna i arrayen, den tredje strängen används ej.
             String elevhem = sovsalElevhem[0];
             String sovsalVaning = sovsalElevhem[2];
-        try {
-            String sovsalID = idb.fetchSingle("SELECT sovsal_id FROM sovsal \n" +
-                                "JOIN elevhem ON elevhem = elevhem_id \n" +
-                                "WHERE elevhemsnamn = \'" + elevhem + "\' AND vaning = " + sovsalVaning);
-            idb.update("UPDATE elev \n" + 
-                    "FORNAMN = \'" + fornamn + "\' \n" +
-                    "EFTERNAMN = \'" + efternamn + "\' \n" +
-                    "SOVSAL = " + sovsalID + "\n" +
-                    "WHERE elev_id = " + elevID);
-        }
-        catch (InfException ettUndantag) {
-            ettUndantag.getMessage();
-            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            
+            try {
+                //Hämtar id från den valda sovsalen
+                String sovsalID = idb.fetchSingle("SELECT sovsal_id FROM sovsal \n" +
+                                    "JOIN elevhem ON elevhem = elevhem_id \n" +
+                                    "WHERE elevhemsnamn = \'" + elevhem + "\' AND vaning = " + sovsalVaning);
+                //Uppdaterar eleven i elevtabellen med de valda värdena
+                idb.update("UPDATE elev \n" + 
+                        "FORNAMN = \'" + fornamn + "\' \n" +
+                        "EFTERNAMN = \'" + efternamn + "\' \n" +
+                        "SOVSAL = " + sovsalID + "\n" +
+                        "WHERE elev_id = " + elevID);
+            }
+            catch (InfException ettUndantag) {
+                ettUndantag.getMessage();
+                JOptionPane.showMessageDialog(null, "Något gick fel.");
+            }
         }
     }//GEN-LAST:event_btnSparaAndringActionPerformed
 
