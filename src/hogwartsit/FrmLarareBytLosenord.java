@@ -146,8 +146,13 @@ public class FrmLarareBytLosenord extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Textfältet saknar värde.");
             }
-        } catch (InfException e) {
+        } catch (InfException ettUndantag) {
             JOptionPane.showMessageDialog(null, "Något gick fel.");
+        }
+        catch (NullPointerException ettAnnatUndantag) {
+            ettAnnatUndantag.getMessage();
+            JOptionPane.showMessageDialog(null, "Ditt användarnamn stämmer inte.");
+            
         }
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 
