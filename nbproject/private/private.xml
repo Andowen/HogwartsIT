@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmLarareBytLosenord.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/HuvudFonster.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevElevhemLista.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevKursSokElev.java</file>
-            <file>file:/C:/Users/ellin/OneDrive/Skrivbord/Systemvetenskap/Delkurs%204/Hogwartsprojekt/HogwartsIT/src/hogwartsit/FrmElevKursSokLarare.java</file>
-=======
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/Start.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmAdminTaBortElev.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/HuvudFonster.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmLarareRedigeraElev.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevElevhemsPokal.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevElevhemLista.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevKursSokLarare.java</file>
-            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmLoggaIn.java</file>
->>>>>>> 0489eb86d451dcf07840652b3d536f4b1abe8da6
+            <file>file:/C:/HogwartsIT/src/hogwartsit/FrmLarareRegistreraHuspoang.java</file>
+            <file>file:/C:/HogwartsIT/src/hogwartsit/Validering.java</file>
+            <file>file:/C:/HogwartsIT/src/hogwartsit/FrmLarareBytLosenord.java</file>
+            <file>file:/C:/HogwartsIT/src/hogwartsit/FrmLarareDraAvHuspoang.java</file>
         </group>
     </open-files>
 </project-private>
