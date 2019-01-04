@@ -45,8 +45,8 @@ public class Validering {
         return ettTal;
     }
 }
-    
 
+    
 //Lösenord vid inloggning
     
 //Elevhem

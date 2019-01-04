@@ -5,6 +5,7 @@
  */
 package hogwartsit;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -33,21 +34,94 @@ public class FrmLarareDraAvHuspoang extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cbElevhem = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tfNyaPoang = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+
+        cbElevhem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin" }));
+
+        jLabel2.setText("Elevhem:");
+
+        jLabel3.setText("Nya huspoäng");
+
+        tfNyaPoang.setColumns(10);
+
+        jButton1.setText("Dra av huspoäng");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbElevhem, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(tfNyaPoang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbElevhem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNyaPoang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80)
+                .addComponent(jButton1)
+                .addGap(84, 84, 84))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            //Kontrollerar att textfältet innehåller ett värde som är ett heltal.
+            if (Validering.textfaltHarVarde(tfNyaPoang) && Validering.textfaltTal(tfNyaPoang)) {
+                //Hämtar namnet på elevhemmet i comboboxen.
+                String elevhem = cbElevhem.getSelectedItem().toString();
+                //Hämtar hupoängen från tabellen Elevhem.
+                String huspoang = idb.fetchSingle("SELECT Huspoang FROM Elevhem where Elevhemsnamn = \'" + elevhem + "\'");
+                //Omvandlar huspoängen och det inkommande talet till int och subtraherar dem.
+                int talHuspoang = Integer.parseInt(huspoang);
+                int nyaHuspoang = Integer.parseInt(tfNyaPoang.getText());
+                int summa = talHuspoang - nyaHuspoang;
+                //Uppdaterar tabellen med den nya huspoängen.
+                idb.update("UPDATE Elevhem SET Huspoang = \'" + summa + "\' WHERE Elevhemsnamn = \'" + elevhem + "\'");
+                //Skriver ut ett meddelande om att poängen har ändrats och den nya huspoängen.
+                JOptionPane.showMessageDialog(null, "Poängen har dragits av. " + elevhem + " har nu sammanlagt " + summa + " poäng.");
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel.");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbElevhem;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField tfNyaPoang;
     // End of variables declaration//GEN-END:variables
 }
