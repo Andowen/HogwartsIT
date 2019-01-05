@@ -5,6 +5,7 @@
  */
 package hogwartsit;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -34,6 +35,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
         //Fyller listor för kurser ovh sovsalar
         fyllKursLista();
         fyllSovsalsLista();
+        lblAndringarSparats.setForeground (Color.green);
     }
 
     /**
@@ -60,6 +62,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
         lblGenerellElevInfo = new javax.swing.JLabel();
         lblSovsal = new javax.swing.JLabel();
         cbSovsal = new javax.swing.JComboBox<>();
+        lblAndringarSparats = new javax.swing.JLabel();
         pnlAndraElevKurs = new javax.swing.JPanel();
         lblElevKurs = new javax.swing.JLabel();
         lblRedigeraKurs = new javax.swing.JLabel();
@@ -109,10 +112,19 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
 
         lblSovsal.setText("Sovsal:");
 
+        lblAndringarSparats.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblAndringarSparats.setText("Ändringarna har sparats!");
+
         javax.swing.GroupLayout pnlAndraElevInfoLayout = new javax.swing.GroupLayout(pnlAndraElevInfo);
         pnlAndraElevInfo.setLayout(pnlAndraElevInfoLayout);
         pnlAndraElevInfoLayout.setHorizontalGroup(
             pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAndraElevInfoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSparaAndring)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAvbryt)
+                .addContainerGap())
             .addGroup(pnlAndraElevInfoLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,28 +136,25 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
                     .addGroup(pnlAndraElevInfoLayout.createSequentialGroup()
                         .addGroup(pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlAndraElevInfoLayout.createSequentialGroup()
-                                .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAndraElevInfoLayout.createSequentialGroup()
-                                .addComponent(lblFornamn)
-                                .addGap(90, 90, 90)))
-                        .addGroup(pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEfternamn)
-                            .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlAndraElevInfoLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblSovsal))
-                            .addGroup(pnlAndraElevInfoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbSovsal, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 189, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAndraElevInfoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSparaAndring)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAvbryt)
-                .addContainerGap())
+                                .addGroup(pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlAndraElevInfoLayout.createSequentialGroup()
+                                        .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAndraElevInfoLayout.createSequentialGroup()
+                                        .addComponent(lblFornamn)
+                                        .addGap(90, 90, 90)))
+                                .addGroup(pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEfternamn)
+                                    .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlAndraElevInfoLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(lblSovsal))
+                                    .addGroup(pnlAndraElevInfoLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbSovsal, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblAndringarSparats, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 108, Short.MAX_VALUE))))
         );
         pnlAndraElevInfoLayout.setVerticalGroup(
             pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +173,9 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
                     .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbSovsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(lblAndringarSparats)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addGroup(pnlAndraElevInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvbryt)
                     .addComponent(btnSparaAndring))
@@ -402,6 +413,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
             //Interna metodanrop för att fylla i elementen i fönstret
             fyllElevInfo();
             fyllAktuellaKurser();
+            lblAndringarSparats.setVisible(false);
             
             //Kontrollerar att elevID inte är null
             if (elevID !=null) {
@@ -431,14 +443,13 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
             try {
                 //Hämtar id från den valda sovsalen
                 String sovsalID = idb.fetchSingle("SELECT sovsal_id FROM sovsal \n" +
-                                    "JOIN elevhem ON elevhem = elevhem_id \n" +
+                                    "JOIN elevhem ON sovsal.elevhem = elevhem.elevhem_id \n" +
                                     "WHERE elevhemsnamn = \'" + elevhem + "\' AND vaning = " + sovsalVaning);
                 //Uppdaterar eleven i elevtabellen med de valda värdena
-                idb.update("UPDATE elev \n" + 
-                        "FORNAMN = \'" + fornamn + "\' \n" +
-                        "EFTERNAMN = \'" + efternamn + "\' \n" +
-                        "SOVSAL = " + sovsalID + "\n" +
+                idb.update("UPDATE elev\n" + 
+                        "SET FORNAMN = \'" + fornamn + "\', EFTERNAMN = \'" + efternamn + "\', SOVSAL = " + sovsalID + "\n" +
                         "WHERE elev_id = " + elevID);
+                lblAndringarSparats.setVisible(true);
             }
             catch (InfException ettUndantag) {
                 ettUndantag.getMessage();
@@ -488,6 +499,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbKursLista;
     private javax.swing.JComboBox<String> cbSovsal;
     private javax.swing.JLabel lblAktuellKurs;
+    private javax.swing.JLabel lblAndringarSparats;
     private javax.swing.JLabel lblEfternamn;
     private javax.swing.JLabel lblElevKurs;
     private javax.swing.JLabel lblFornamn;

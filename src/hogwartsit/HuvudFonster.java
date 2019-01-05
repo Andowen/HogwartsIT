@@ -41,7 +41,7 @@ public class HuvudFonster extends javax.swing.JFrame {
      */
     public HuvudFonster(InfDB idb) {
         initComponents();
-        this.setSize(600, 400);
+        this.setSize(800, 600);
         this.idb = idb;
         paneHuvudfonsterFlikar = new ClosableTabbedPane() ;
         getContentPane().add(paneHuvudfonsterFlikar);
