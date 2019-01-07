@@ -368,7 +368,6 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
             //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
             for (int i = 0; i < kursLista.size(); i++) {
                     String kursNamn = kursLista.get(i).get("KURSNAMN");
-                    //Kontrollerar att variabeln kursnamn inte är null.
                         cbKursLista.addItem(kursNamn);
             } 
         }
