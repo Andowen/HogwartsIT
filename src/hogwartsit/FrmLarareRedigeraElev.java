@@ -276,7 +276,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
                         .addGap(34, 34, 34)
                         .addComponent(btnSok))
                     .addComponent(pnlElevInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +289,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
                     .addComponent(btnSok))
                 .addGap(26, 26, 26)
                 .addComponent(pnlElevInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();

@@ -5,6 +5,11 @@
  */
 package hogwartsit;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -15,6 +20,8 @@ import oru.inf.InfException;
 public class FrmLarareAndraKursbetyg extends javax.swing.JInternalFrame {
 
     private static InfDB idb;
+    private String forNamn;
+    private String efterNamn;
     
     /**
      * Creates new form FrmLarareAndraKursbetyg
@@ -33,21 +40,163 @@ public class FrmLarareAndraKursbetyg extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        tfSokElev = new javax.swing.JTextField();
+        btnSok = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        cbKurser = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        cbKursbetyg = new javax.swing.JComboBox<>();
+        btnSpara = new javax.swing.JButton();
+
+        jLabel1.setText("Sök elev:");
+
+        tfSokElev.setColumns(10);
+
+        btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Välj kurs");
+
+        jLabel3.setText("Välj kursbetyg:");
+
+        btnSpara.setText("Spara");
+        btnSpara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSparaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSpara)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(141, 141, 141)
+                        .addComponent(jLabel3))
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cbKurser, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfSokElev, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btnSok))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(cbKursbetyg, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSokElev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSok))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbKurser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbKursbetyg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76)
+                .addComponent(btnSpara)
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+         try{
+            //Kontrollerar att textfältet inte är tomt.
+            if(Validering.textfaltHarVarde(tfSokElev)){
+                // Hämtar texten i textfältet SokRuta, splittar strängen vid mellanslag och skapar en array av strängar.
+                String[] elevNamnet = tfSokElev.getText().trim().split("\\s+");
+                forNamn = elevNamnet[0];
+                efterNamn = elevNamnet[1]; 
+                // Hämtar kurser som en elev varit registrerad på.
+                 ArrayList<HashMap<String, String>> resultat = idb.fetchRows("SELECT Kursnamn FROM Kurs\n" +
+                    "JOIN Har_betyg_i ON Har_betyg_i.Kurs_ID = Kurs.Kurs_ID \n" +
+                    "JOIN Elev ON Elev.Elev_ID = Har_betyg_i.Elev_ID \n" +
+                    "WHERE Fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'");
+                 //Kontrollerar att resultatet inte är null.
+                if (resultat != null) {
+                    //Loopar genom ArrayListen och hämtar kursnamnen för varje kurs i ArrayListens HashMap.
+                    for (int i = 0; i < resultat.size(); i++) {
+                        String kursNamn = resultat.get(i).get("KURSNAMN");
+                        //Kontrollerar att de inte är null.
+                        if (kursNamn != null) {
+                            //Lägger till kursnamnen i textrutan.
+                            cbKurser.addItem(kursNamn);
+                        }
+                    }
+                    ArrayList<HashMap<String, String>> allaBetyg = idb.fetchRows("SELECT FIRST 6 Betygsbeteckning FROM Betyg");
+                    if (allaBetyg != null) {
+
+                        for (int index = 0; index < allaBetyg.size(); index++) {
+                            String betygBeteckning = allaBetyg.get(index).get("BETYGSBETECKNING");
+                            if (betygBeteckning != null) {
+                                cbKursbetyg.addItem(betygBeteckning);
+                            }
+                        }
+                    }
+                } else {
+                    // Felmeddelande om det inte finns någon elev med det namnet.
+                    JOptionPane.showMessageDialog(null, "Det finns ingen elev med det namnet.");
+                }
+            }
+        } catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+        }
+    }//GEN-LAST:event_btnSokActionPerformed
+
+    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
+        
+        //Hämtar de valda alternativen i comboboxarna.
+        String valtBetyg = cbKursbetyg.getSelectedItem().toString();
+        String valdKurs = cbKurser.getSelectedItem().toString();
+
+        try {
+            // Hämtar elevens ID.
+            String elevID = idb.fetchSingle("SELECT Elev_ID FROM Elev WHERE Fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'");
+            //Hämtar kursens ID med hjälp av det valda kursen i comboboxen.
+            String kursID = idb.fetchSingle("SELECT Kurs_ID FROM Kurs WHERE Kursnamn = \'" + valdKurs + "\'");
+            //Uppdaterar tabellen med den nya betygsbeteckningen.
+            idb.update("UPDATE Har_betyg_i SET Kursbetyg = \'" + valtBetyg + "\' WHERE Elev_ID = \'" + elevID + "\' AND Kurs_ID = \'" + kursID + "\'");
+            //Skriver ut ett meddelande om att betyget har ändrats.
+            JOptionPane.showMessageDialog(null, "Betyget har ändrats.");
+
+        } catch (InfException ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Något gick fel.");
+
+        }
+    }//GEN-LAST:event_btnSparaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSok;
+    private javax.swing.JButton btnSpara;
+    private javax.swing.JComboBox<String> cbKursbetyg;
+    private javax.swing.JComboBox<String> cbKurser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField tfSokElev;
     // End of variables declaration//GEN-END:variables
 }
