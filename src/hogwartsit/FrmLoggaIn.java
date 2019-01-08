@@ -18,7 +18,8 @@ public class FrmLoggaIn extends javax.swing.JFrame {
 
     private static InfDB idb;
     private boolean arInloggad = false;
-    private boolean arAdmin = false;
+    private static boolean arAdmin = false;
+    private static String lararID = "";
     
     /**
      * Creates new form FrmLoggaIn2
@@ -138,14 +139,16 @@ public class FrmLoggaIn extends javax.swing.JFrame {
             
                 try {
                 //Hämtar lösenord och administratörsstatus från läraren.
-                HashMap<String, String> resultat = idb.fetchRow("SELECT losenord, administrator FROM larare WHERE fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'"); 
+                HashMap<String, String> resultat = idb.fetchRow("SELECT larar_id, losenord, administrator FROM larare WHERE fornamn = \'" + forNamn + "\' AND efternamn = \'" + efterNamn + "\'"); 
                 
                 String losenord = resultat.get("LOSENORD");
                 String administrator = resultat.get("ADMINISTRATOR");
+                String ettlararID = resultat.get("LARAR_ID");
                 
                     //Kontrollerar att lösenordet som skrivits matchar det som är lagrat i databasen
                     if (losenordet.equals(losenord)) {
                         arInloggad = true;
+                        lararID = ettlararID;
                     
                         //Kontrollerar om användaren har administratörs-status eller ej
                         if (administrator.equals("T")) {
@@ -181,9 +184,13 @@ public class FrmLoggaIn extends javax.swing.JFrame {
         return arInloggad;
     }
     
-    public boolean getArAdmin() {
+    public static boolean getArAdmin() {
          //Metoden returnerar en boolean om någon är administratör eller inte, för användning i HuvudFonster-klassen
         return arAdmin;       
+    }
+    
+    public static String getArInloggadSom() {
+        return lararID;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

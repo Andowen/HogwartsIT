@@ -162,7 +162,7 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
 
         pnlLaggTillElevKurs.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblRedigeraKurs.setText("Lägg till kurser för eleven");
+        lblRedigeraKurs.setText("Lägg till kurser för eleven (Valfritt)");
 
         lblAktuellKurs.setText("Aktuellt kursutbud:");
 
@@ -218,9 +218,6 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAvbryt, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlLaggTillElevKursLayout.createSequentialGroup()
-                        .addComponent(lblRedigeraKurs)
-                        .addContainerGap())
-                    .addGroup(pnlLaggTillElevKursLayout.createSequentialGroup()
                         .addGroup(pnlLaggTillElevKursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlLaggTillElevKursLayout.createSequentialGroup()
                                 .addGroup(pnlLaggTillElevKursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,15 +233,18 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
                         .addGroup(pnlLaggTillElevKursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblLaggTillTaBortKurs, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(84, 84, 84))))
+                        .addGap(84, 84, 84))
+                    .addGroup(pnlLaggTillElevKursLayout.createSequentialGroup()
+                        .addComponent(lblRedigeraKurs, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         pnlLaggTillElevKursLayout.setVerticalGroup(
             pnlLaggTillElevKursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLaggTillElevKursLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lblRedigeraKurs)
                 .addGroup(pnlLaggTillElevKursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlLaggTillElevKursLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lblRedigeraKurs)
                         .addGap(23, 23, 23)
                         .addComponent(lblAktuellKurs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -259,7 +259,7 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
                             .addComponent(btnAvbryt)
                             .addComponent(lblElevenRegistrerad)))
                     .addGroup(pnlLaggTillElevKursLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(62, 62, 62)
                         .addComponent(lblLaggTillTaBortKurs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,8 +372,8 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
     }//GEN-LAST:event_btnAvbrytActionPerformed
 
     private void btnSlutforRegistreringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSlutforRegistreringActionPerformed
-        //Kontrollerar att användasren har fyllt i alla fält
-        if (Validering.textfaltHarVarde(tfFornamn) && Validering.textfaltHarVarde(tfEfternamn) && Validering.elementHarValtsICombobox(cbSovsal, "Välj en sovsal") && Validering.listaHarVarde(valdaKurser, lstValdaKurser, "Lägg till minst en kurs")) {
+        //Kontrollerar att användasren har fyllt i alla obligatoriska fält
+        if (Validering.textfaltHarVarde(tfFornamn) && Validering.textfaltHarVarde(tfEfternamn) && Validering.elementHarValtsICombobox(cbSovsal, "Välj en sovsal")) {
             //Lokala variabler somtilldelas innehållet av textfälten.
             String fornamn = tfFornamn.getText();
             String efternamn = tfEfternamn.getText();
@@ -395,31 +395,35 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
             //Lägger till eleven i elevtabellen med de valda värdena
             idb.insert("INSERT INTO elev (elev_id, fornamn, efternamn, sovsal) \n" +
                 "VALUES (" + elevID + ", \'" + fornamn + "\', \'" + efternamn + "\', " + sovsalID + ")");
+            
+            //Kontrollerar om listan med valda kurser har värde
+            if (!valdaKurser.isEmpty()) {
+                //Loopar igenom listan med valda kurser
+                for(int i = 0; i< valdaKurser.getSize(); i++){
+                    //För varje iteration hämtas namnet på en kurs i listan
+                    String kursNamn = valdaKurser.getElementAt(i).toString();
 
-            for(int i = 0; i< valdaKurser.getSize(); i++){
-            String kursNamn = valdaKurser.getElementAt(i).toString();
-
-                try {
-                    String kursID = idb.fetchSingle("SELECT kurs_id FROM kurs WHERE kursnamn = \'" + kursNamn + "\'");
-                    idb.insert("INSERT INTO registrerad_pa(elev_id, kurs_id) \n" +
-                        "VALUES (" + elevID + ", " + kursID + ")");
-
-                    //Visar ett litet meddelande för användaren
-                    lblElevenRegistrerad.setVisible(true);
-                    //Ändrar texten på knappen avbryt
-                    btnAvbryt.setText("Registrera ny elev");
-                    //Gör så elementen inte längre går att redigera
-                    setElementRedigerbara(false);
-
-
-                }
-                catch (InfException ettUndantag) {
-                    ettUndantag.getMessage();
-                }
-                catch (NullPointerException ettAnnatUndantag) {
-                    ettAnnatUndantag.getMessage();
-                }  
-            }      
+                    try {
+                        //Hämtar kursID på kursen
+                        String kursID = idb.fetchSingle("SELECT kurs_id FROM kurs WHERE kursnamn = \'" + kursNamn + "\'");
+                        //Lägger till kurs och elev id i "Registrerad_pa" tabellen
+                        idb.insert("INSERT INTO registrerad_pa(elev_id, kurs_id) \n" +
+                            "VALUES (" + elevID + ", " + kursID + ")");
+                    }
+                    catch (InfException ettUndantag) {
+                        ettUndantag.getMessage();
+                    }
+                    catch (NullPointerException ettAnnatUndantag) {
+                        ettAnnatUndantag.getMessage();
+                    }  
+            }     
+            } 
+                //Visar ett litet meddelande för användaren
+                lblElevenRegistrerad.setVisible(true);
+                //Ändrar texten på knappen avbryt
+                btnAvbryt.setText("Registrera ny elev");
+                //Gör så elementen inte längre går att redigera
+                setElementRedigerbara(false);
             }
             catch (InfException ettUndantag) {
                 ettUndantag.getMessage();
