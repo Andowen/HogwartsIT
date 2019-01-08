@@ -221,6 +221,16 @@
             <Property name="text" type="java.lang.String" value="Administrat&#xf6;r"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuItmAdminGeAdminStatus">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Administrat&#xf6;rsstatus"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmAdminGeAdminStatusActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
