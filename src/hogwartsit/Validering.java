@@ -5,6 +5,9 @@
  */
 package hogwartsit;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -43,6 +46,26 @@ public class Validering {
             ettTal = false;    
         }    
         return ettTal;
+    }
+    
+    public static boolean elementHarValtsICombobox(JComboBox<String> enCombobox, String ettMeddelande) {
+        boolean elementHarValts = true;
+        if(enCombobox.getSelectedIndex() <= 0) {
+            JOptionPane.showMessageDialog(null, ettMeddelande);
+            enCombobox.requestFocusInWindow();
+            return false;
+        }
+        return elementHarValts;
+    }
+    
+    public static boolean listaHarVarde(DefaultListModel enLista, JList enJList, String ettMeddelande){
+        boolean listaHarVarde = true;
+        if (enLista.getSize() == 0) {
+           JOptionPane.showMessageDialog(null, ettMeddelande);
+           enJList.requestFocusInWindow();
+           return false;
+        }
+        return listaHarVarde;
     }
 }
 
