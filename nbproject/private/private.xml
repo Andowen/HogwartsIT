@@ -3,8 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/HuvudFonster.java</file>
             <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmAdminGeLarareAdminStatus.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/HogwartsIT/src/hogwartsit/FrmLarareRegistreraKursbetyg.java</file>
+            <file>file:/C:/HogwartsIT/src/hogwartsit/FrmLarareElevinfoNyregistreraElev.java</file>
+            <file>file:/C:/HogwartsIT/src/hogwartsit/HuvudFonster.java</file>
+            <file>file:/C:/HogwartsIT/src/hogwartsit/FrmAdminGeLarareAdminStatus.java</file>
+=======
+
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmLarareElevinfoNyregistreraElev.java</file>
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/Start.java</file>
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/MetodService.java</file>
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmLarareRedigeraElev.java</file>
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmElevKursSokLarare.java</file>
+            <file>file:/C:/Users/andow/GitHub/HogwartsIT/src/hogwartsit/FrmLoggaIn.java</file>
+
+            <file>file:/C:/HogwartsIT/src/hogwartsit/FrmLarareAndraKursbetyg.java</file>
+
+>>>>>>> c9b91df23e36b8c71ed058cf135597395b3a7873
+>>>>>>> parent of cbfeffc... .
         </group>
     </open-files>
 </project-private>
