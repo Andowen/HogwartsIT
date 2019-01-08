@@ -31,9 +31,9 @@ public class MetodService {
                 ArrayList<HashMap<String, String>> kursLista = idb.fetchRows("SELECT kursnamn FROM kurs");
                 //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
                 for (int i = 0; i < kursLista.size(); i++) {
-                    String kursNamn = kursLista.get(i).get("KURSNAMN");
-                    enCombobox.addItem(kursNamn);
-                } 
+                        String kursNamn = kursLista.get(i).get("KURSNAMN");
+                            enCombobox.addItem(kursNamn);
+            } 
             }
             catch (InfException ettUndantag) {
                 ettUndantag.getMessage();
@@ -70,63 +70,6 @@ public class MetodService {
                 ettAnnatUndantag.getMessage();
             }  
         }
-    }
-
-    public void fyllComboboxKursElev (JComboBox<String> enCombobox) {
-        try {
-            //Hämtar en lista på kursnamn på alla kurser i databasen
-            ArrayList<HashMap<String, String>> kursLista = idb.fetchRows("SELECT kursnamn FROM kurs");
-            //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
-            for (int i = 0; i < kursLista.size(); i++) {
-                String kursNamn = kursLista.get(i).get("KURSNAMN");
-                enCombobox.addItem(kursNamn);
-            } 
-        }
-        catch (InfException ettUndantag) {
-            ettUndantag.getMessage();
-        }
-        catch (NullPointerException ettAnnatUndantag) {
-            ettAnnatUndantag.getMessage();
-        }   
-    }
-    
-    public void fyllComboboxSovsalsLista (JComboBox<String> enCombobox) {
-        try {
-            //Hämtar en lista på elevhemsnamn på alla elevhem i databasen
-            ArrayList<HashMap<String, String>> elevhemsLista = idb.fetchRows("SELECT elevhemsnamn, vaning FROM elevhem \n" +
-                                        "JOIN sovsal ON elevhem = elevhem_id");
-            //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
-            for (int i = 0; i < elevhemsLista.size(); i++) {
-                    String elevhemsNamn = elevhemsLista.get(i).get("ELEVHEMSNAMN");
-                    String sovsalVaning = elevhemsLista.get(i).get("VANING");
-                    String elevhemSovsal = elevhemsNamn + " våning: " + sovsalVaning;
-                    enCombobox.addItem(elevhemSovsal);
-            } 
-        }
-        catch (InfException ettUndantag) {
-            ettUndantag.getMessage();
-        }
-        catch (NullPointerException ettAnnatUndantag) {
-            ettAnnatUndantag.getMessage();
-        }  
-    }
-    
-    public void fyllComboboxElevhemsLista(JComboBox<String> enCombobox) {
-        try {
-            //Hämtar en lista på elevhemsnamn på alla elevhem i databasen
-            ArrayList<HashMap<String, String>> elevhemsLista = idb.fetchRows("SELECT elevhemsnamn FROM elevhem");
-            //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
-            for (int i = 0; i < elevhemsLista.size(); i++) {
-                    String elevhemsNamn = elevhemsLista.get(i).get("ELEVHEMSNAMN");
-                    enCombobox.addItem(elevhemsNamn);
-            } 
-        }
-        catch (InfException ettUndantag) {
-            ettUndantag.getMessage();
-        }
-        catch (NullPointerException ettAnnatUndantag) {
-            ettAnnatUndantag.getMessage();
-        }     
     }
 }
 
