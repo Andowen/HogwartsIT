@@ -35,7 +35,6 @@ public class HuvudFonster extends javax.swing.JFrame {
     private FrmLarareRedigeraElev frmLarareRedigeraElev;
     private FrmLarareRegistreraHuspoang frmLarareRegistreraHuspoang;
     private FrmLarareRegistreraKursbetyg frmLarareRegistreraKursbetyg;
-    private FrmAdminGeLarareAdminStatus frmAdminGeLarareAdminStatus;
     
     /**
      * Creates new form TestFönster
@@ -86,7 +85,6 @@ public class HuvudFonster extends javax.swing.JFrame {
         mnuItmLarareDraAvHuspoang = new javax.swing.JMenuItem();
         mnuItmLarareBytLosenord = new javax.swing.JMenuItem();
         mnuAdmin = new javax.swing.JMenu();
-        mnuItmAdminGeAdminStatus = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HogwartsIT");
@@ -277,15 +275,6 @@ public class HuvudFonster extends javax.swing.JFrame {
 
         mnuAdmin.setText("Administratör");
         mnuAdmin.setEnabled(false);
-
-        mnuItmAdminGeAdminStatus.setText("Administratörsstatus");
-        mnuItmAdminGeAdminStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuItmAdminGeAdminStatusActionPerformed(evt);
-            }
-        });
-        mnuAdmin.add(mnuItmAdminGeAdminStatus);
-
         mnuHuvudMeny.add(mnuAdmin);
 
         setJMenuBar(mnuHuvudMeny);
@@ -598,19 +587,6 @@ public class HuvudFonster extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuItmLarareBytLosenordActionPerformed
 
-    private void mnuItmAdminGeAdminStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmAdminGeAdminStatusActionPerformed
-        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmAdminGeLarareAdminStatus == null || !frmAdminGeLarareAdminStatus.isEnabled()) {
-           frmAdminGeLarareAdminStatus = new FrmAdminGeLarareAdminStatus(idb);
-            oppnaFlik(frmAdminGeLarareAdminStatus, "Administratörsstatus");
-            }
-        
-        //Flyttar fokus till filken, om det redan finns en sådan öppen.
-        else{
-            flyttaFokusTillFlik("Administratörsstatus");
-        }
-    }//GEN-LAST:event_mnuItmAdminGeAdminStatusActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -618,7 +594,6 @@ public class HuvudFonster extends javax.swing.JFrame {
     private javax.swing.JMenu mnuAdmin;
     private javax.swing.JMenu mnuElev;
     private javax.swing.JMenuBar mnuHuvudMeny;
-    private javax.swing.JMenuItem mnuItmAdminGeAdminStatus;
     private javax.swing.JMenuItem mnuItmAvsluta;
     private javax.swing.JMenu mnuItmElevKurser;
     private javax.swing.JMenuItem mnuItmElevSokBetyg;
