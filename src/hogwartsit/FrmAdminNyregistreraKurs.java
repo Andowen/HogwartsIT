@@ -4,18 +4,21 @@
  * and open the template in the editor.
  */
 package hogwartsit;
-
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /**
  *
  * @author andow
  */
 public class FrmAdminNyregistreraKurs extends javax.swing.JInternalFrame {
 
+    private static InfDB idb;
     /**
      * Creates new form FrmAdminNyregistreraKurs
      */
-    public FrmAdminNyregistreraKurs() {
+    public FrmAdminNyregistreraKurs(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**

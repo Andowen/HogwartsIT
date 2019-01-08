@@ -239,11 +239,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ta bort L&#xe4;rare"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmTaBortLarareActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mnuItmRedigeraLarare">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Redigera Larare"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmRedigeraLarareActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mnuItemGorAdmin">
                   <Properties>
@@ -261,6 +267,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Redigera Elevhem"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmRedigeraElevhemActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -273,6 +282,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ta bort Elev"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmTaBortElevActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -285,11 +297,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ta bort Kurs"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmTaBortKursActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mnuItmRedigeraKurs">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Redigera Kurs"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuItmRedigeraKursActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

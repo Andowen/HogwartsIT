@@ -21,7 +21,6 @@ public class HuvudFonster extends javax.swing.JFrame {
     private static InfDB idb;
     private ClosableTabbedPane paneHuvudfonsterFlikar;
     private FrmLoggaIn frmLoggaIn;
-    private FrmAdminTaBortElev frmAdminTaBortElev;
     private FrmElevElevhemLista frmElevElevhemslista;
     private FrmElevElevhemsPokal frmElevElevhemsPokal;
     private FrmElevHittaPrefekt frmElevHittaPrefekt;
@@ -39,6 +38,10 @@ public class HuvudFonster extends javax.swing.JFrame {
     private FrmAdminNyregistreraLarare frmAdminNyregistreraLarare;
     private FrmAdminRedigeraElevhem frmAdminRedigeraElevhem;
     private FrmAdminRedigeraKurs frmAdminRedigeraKurs;
+    private FrmAdminRedigeraLarare frmAdminRedigeraLarare;
+    private FrmAdminTaBortElev frmAdminTaBortElev;
+    private FrmAdminTaBortKurs frmAdminTaBortKurs;
+    private FrmAdminTaBortLarare frmAdminTaBortLarare;
     
     
     /**
@@ -297,9 +300,19 @@ public class HuvudFonster extends javax.swing.JFrame {
         jMenu1.add(mnuItmNyregLarare);
 
         mnuItmTaBortLarare.setText("Ta bort Lärare");
+        mnuItmTaBortLarare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmTaBortLarareActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnuItmTaBortLarare);
 
         mnuItmRedigeraLarare.setText("Redigera Larare");
+        mnuItmRedigeraLarare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmRedigeraLarareActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnuItmRedigeraLarare);
 
         mnuItemGorAdmin.setText("Gör admin");
@@ -310,6 +323,11 @@ public class HuvudFonster extends javax.swing.JFrame {
         jMenu3.setText("Elevhem");
 
         mnuItmRedigeraElevhem.setText("Redigera Elevhem");
+        mnuItmRedigeraElevhem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmRedigeraElevhemActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnuItmRedigeraElevhem);
 
         mnuAdmin.add(jMenu3);
@@ -317,6 +335,11 @@ public class HuvudFonster extends javax.swing.JFrame {
         jMenu4.setText("Elev");
 
         mnuItmTaBortElev.setText("Ta bort Elev");
+        mnuItmTaBortElev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmTaBortElevActionPerformed(evt);
+            }
+        });
         jMenu4.add(mnuItmTaBortElev);
 
         mnuAdmin.add(jMenu4);
@@ -324,9 +347,19 @@ public class HuvudFonster extends javax.swing.JFrame {
         jMenu5.setText("Kurs");
 
         mnuItmTaBortKurs.setText("Ta bort Kurs");
+        mnuItmTaBortKurs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmTaBortKursActionPerformed(evt);
+            }
+        });
         jMenu5.add(mnuItmTaBortKurs);
 
         mnuItmRedigeraKurs.setText("Redigera Kurs");
+        mnuItmRedigeraKurs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItmRedigeraKursActionPerformed(evt);
+            }
+        });
         jMenu5.add(mnuItmRedigeraKurs);
 
         mnuAdmin.add(jMenu5);
@@ -629,14 +662,86 @@ public class HuvudFonster extends javax.swing.JFrame {
     private void mnuItmNyregLarareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmNyregLarareActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
         if(!flikFinns("Nyregistrera lärare")) {
-            frmLarareBytLosenord = new FrmLarareBytLosenord(idb);
-            oppnaFlik(frmLarareBytLosenord, "Nyregistrera lärare");
+            frmAdminNyregistreraLarare = new FrmAdminNyregistreraLarare(idb);
+            oppnaFlik(frmAdminNyregistreraLarare, "Nyregistrera lärare");
         } 
         //Flyttar fokus till filken, om det redan finns en sådan öppen.
         else{
             flyttaFokusTillFlik("Nyregistrera lärare");
         }
     }//GEN-LAST:event_mnuItmNyregLarareActionPerformed
+
+    private void mnuItmTaBortLarareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmTaBortLarareActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(!flikFinns("Ta bort lärare")) {
+            frmAdminTaBortLarare = new FrmAdminTaBortLarare(idb);
+            oppnaFlik(frmAdminTaBortLarare, "Ta bort lärare");
+        } 
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Ta bort lärare");
+        }
+    }//GEN-LAST:event_mnuItmTaBortLarareActionPerformed
+
+    private void mnuItmRedigeraLarareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmRedigeraLarareActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(!flikFinns("Redigera lärare")) {
+            frmAdminRedigeraLarare = new FrmAdminRedigeraLarare(idb);
+            oppnaFlik(frmAdminRedigeraLarare, "Redigera lärare");
+        } 
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Redigera lärare");
+        }
+    }//GEN-LAST:event_mnuItmRedigeraLarareActionPerformed
+
+    private void mnuItmRedigeraElevhemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmRedigeraElevhemActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(!flikFinns("Redigera elevhem")) {
+            frmAdminRedigeraElevhem = new FrmAdminRedigeraElevhem(idb);
+            oppnaFlik(frmAdminRedigeraElevhem, "Redigera elevhem");
+        } 
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Redigera elevhem");
+        }
+    }//GEN-LAST:event_mnuItmRedigeraElevhemActionPerformed
+
+    private void mnuItmTaBortElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmTaBortElevActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(!flikFinns("Ta bort elev")) {
+            frmAdminTaBortElev = new FrmAdminTaBortElev(idb);
+            oppnaFlik(frmAdminTaBortElev, "Ta bort elev");
+        } 
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Ta bort elev");
+        }
+    }//GEN-LAST:event_mnuItmTaBortElevActionPerformed
+
+    private void mnuItmTaBortKursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmTaBortKursActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(!flikFinns("Ta bort kurs")) {
+            frmAdminTaBortKurs = new FrmAdminTaBortKurs(idb);
+            oppnaFlik(frmAdminTaBortKurs, "Ta bort kurs");
+        } 
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Ta bort kurs");
+        }
+    }//GEN-LAST:event_mnuItmTaBortKursActionPerformed
+
+    private void mnuItmRedigeraKursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmRedigeraKursActionPerformed
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
+        if(!flikFinns("Redigera kurs")) {
+            frmAdminRedigeraKurs = new FrmAdminRedigeraKurs(idb);
+            oppnaFlik(frmAdminRedigeraKurs, "Redigera kurs");
+        } 
+        //Flyttar fokus till filken, om det redan finns en sådan öppen.
+        else{
+            flyttaFokusTillFlik("Redigera kurs");
+        }
+    }//GEN-LAST:event_mnuItmRedigeraKursActionPerformed
 
 
 
