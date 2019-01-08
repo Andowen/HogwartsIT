@@ -369,58 +369,6 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
         }
     }
     
-    private void fyllKursLista() {
-        //Kontrollerar om den inloggade läraren är admin
-        if(FrmLoggaIn.getArAdmin()) {
-            try {
-                //Hämtar en lista på kursnamn på alla kurser i databasen
-                ArrayList<HashMap<String, String>> kursLista = idb.fetchRows("SELECT kursnamn FROM kurs");
-                //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
-                for (int i = 0; i < kursLista.size(); i++) {
-                        String kursNamn = kursLista.get(i).get("KURSNAMN");
-                            cbKursLista.addItem(kursNamn);
-            } 
-            }
-            catch (InfException ettUndantag) {
-                ettUndantag.getMessage();
-            }
-            catch (NullPointerException ettAnnatUndantag) {
-                ettAnnatUndantag.getMessage();
-            }   
-        }
-        else {
-            try {
-                //Hämtar lärar ID på den inloggade läraren
-                String lararID = FrmLoggaIn.getArInloggadSom();
-                //Hämtar en lista på kursnamn på lärarens kurser i databasen
-                ArrayList<HashMap<String, String>> kursLista = idb.fetchRows("SELECT kursnamn FROM kurs WHERE kurslarare = " + lararID);
-                //Kontrollerar om läraren har några kurser kopplade till sig, annars är listan null
-                if (kursLista != null) {
-                    //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
-                    for (int i = 0; i < kursLista.size(); i++) {
-                        String kursNamn = kursLista.get(i).get("KURSNAMN");
-                        cbKursLista.addItem(kursNamn);  
-                    }
-                }
-                else {
-                    //Byter ut "Välj en kurs" och visar istället "Inga kurser att visa"
-                    cbKursLista.removeItemAt(0);
-                    String meddelande = "Inga kurser att visa";
-                    cbKursLista.addItem(meddelande);
-                }
-
-                
-            }
-            catch (InfException ettUndantag) {
-                ettUndantag.getMessage();
-            }
-            catch (NullPointerException ettAnnatUndantag) {
-                ettAnnatUndantag.getMessage();
-            }  
-        }
-   
-    }
-    
     private void fyllSovsalsLista() {
         try {
             //Hämtar en lista på elevhemsnamn på alla elevhem i databasen

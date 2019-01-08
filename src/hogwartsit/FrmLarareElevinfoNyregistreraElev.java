@@ -22,6 +22,7 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
     private String elevID = null;
     private DefaultListModel valdaKurser;
     private javax.swing.JList lstValdaKurser;
+    private MetodService metodService;
 
 
 
@@ -30,10 +31,11 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
      */
     public FrmLarareElevinfoNyregistreraElev(InfDB idb) {
         valdaKurser = new DefaultListModel();
+        metodService = new MetodService(idb);
         initComponents();
         this.idb = idb;
         fyllSovsalsLista();
-        fyllKursLista();
+        metodService.fyllComboboxKurserLarare(cbKursLista);
         lblElevenRegistrerad.setVisible(false);
     }
 
@@ -314,23 +316,7 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
             }    
     }
         
-    private void fyllKursLista() {
-        try {
-            //Hämtar en lista på kursnamn på alla kurser i databasen
-            ArrayList<HashMap<String, String>> kursLista = idb.fetchRows("SELECT kursnamn FROM kurs");
-            //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
-            for (int i = 0; i < kursLista.size(); i++) {
-                    String kursNamn = kursLista.get(i).get("KURSNAMN");
-                    cbKursLista.addItem(kursNamn);
-            } 
-        }
-        catch (InfException ettUndantag) {
-            ettUndantag.getMessage();
-        }
-        catch (NullPointerException ettAnnatUndantag) {
-            ettAnnatUndantag.getMessage();
-        }    
-    }
+
     
     private void aterstallFalt() {
         tfFornamn.setText("");
@@ -338,7 +324,6 @@ public class FrmLarareElevinfoNyregistreraElev extends javax.swing.JInternalFram
         cbSovsal.setSelectedIndex(0);
         cbKursLista.setSelectedIndex(0);
         valdaKurser.clear();
-        fyllKursLista();
     }
         
      private void setElementRedigerbara(boolean enBoolean) {
