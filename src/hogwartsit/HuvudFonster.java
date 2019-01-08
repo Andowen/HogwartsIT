@@ -309,6 +309,19 @@ public class HuvudFonster extends javax.swing.JFrame {
             }
         }
     }
+    
+    private boolean flikFinns(String flikTitel) {
+        boolean flikFinns = false;
+                int tabCount = paneHuvudfonsterFlikar.getTabCount();
+        for (int i=0; i < tabCount; i++) 
+        {
+            String tabTitle = paneHuvudfonsterFlikar.getTitleAt(i);
+            if (tabTitle.equals(flikTitel)){ 
+                flikFinns = true;
+            }
+        }
+        return flikFinns;
+    }
 
     private void mnuItmLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLoggaInActionPerformed
         //Instansierar ett inloggningsfönster om ett sådant inte redan finns.
@@ -383,7 +396,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmElevSokBetygActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmElevSokBetygActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevBetyg == null || !frmElevBetyg.isEnabled()) {
+        if(frmElevBetyg == null || !frmElevBetyg.isEnabled() || !frmElevBetyg.isShowing()) {
            frmElevBetyg = new FrmElevSokBetyg(idb);
             oppnaFlik(frmElevBetyg, "Sök betyg");
             }
@@ -396,6 +409,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmStangAktuelltFonsterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmStangAktuelltFonsterActionPerformed
         int enFlik = paneHuvudfonsterFlikar.getSelectedIndex();
+        
         paneHuvudfonsterFlikar.remove(enFlik);      
     }//GEN-LAST:event_mnuItmStangAktuelltFonsterActionPerformed
 
@@ -405,7 +419,7 @@ public class HuvudFonster extends javax.swing.JFrame {
 
     private void mnuItmListaEleverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmListaEleverActionPerformed
         //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmElevElevhemslista == null || !frmElevElevhemslista.isEnabled()) {
+        if(frmElevElevhemslista == null || !frmElevElevhemslista.isEnabled() || !frmElevElevhemslista.isShowing()) {
            frmElevElevhemslista = new FrmElevElevhemLista(idb);
             oppnaFlik(frmElevElevhemslista, "Elevhemslista");
             }
@@ -482,11 +496,12 @@ public class HuvudFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuItmLarareNyregElevActionPerformed
 
     private void mnuItmLarareRedigeraElevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItmLarareRedigeraElevActionPerformed
-        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.
-        if(frmLarareRedigeraElev == null || !frmLarareRedigeraElev.isEnabled()) {
+        //Ett fönster instansieras och öppnas i en flik om ett likadant fönster inte redan finns.      
+        
+        if(!flikFinns("Redigera en elev")) {
            frmLarareRedigeraElev = new FrmLarareRedigeraElev(idb);
             oppnaFlik(frmLarareRedigeraElev, "Redigera en elev");
-            }
+        }
         
         //Flyttar fokus till filken, om det redan finns en sådan öppen.
         else{

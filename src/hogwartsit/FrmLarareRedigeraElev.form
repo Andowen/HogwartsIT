@@ -22,15 +22,20 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblSokElev" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblSokElev" min="-2" max="-2" attributes="0"/>
+                          <Component id="pnlElevInformation" alignment="0" min="-2" pref="646" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="tfNamnFalt" min="-2" pref="169" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="btnSok" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
-                  <Component id="pnlElevInformation" alignment="0" min="-2" pref="646" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -46,7 +51,7 @@
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="pnlElevInformation" min="-2" pref="377" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -229,7 +234,9 @@
             <Component class="javax.swing.JComboBox" name="cbSovsal">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="V&#xe4;lj en sovsal"/>
+                  </StringArray>
                 </Property>
               </Properties>
               <AuxValues>
@@ -379,7 +386,9 @@
             <Component class="javax.swing.JComboBox" name="cbKursLista">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="V&#xe4;lj en kurs"/>
+                  </StringArray>
                 </Property>
               </Properties>
               <AuxValues>

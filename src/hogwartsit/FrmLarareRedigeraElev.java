@@ -5,7 +5,6 @@
  */
 package hogwartsit;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -23,19 +22,20 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     private String elevID = null;
     private String forNamn;
     private String efterNamn;
-    
+    private MetodService metodService;
     /**
      * Creates new form FrmLarareRedigeraElev
      */
     public FrmLarareRedigeraElev(InfDB idb) {
         initComponents();
         this.idb = idb;
+        metodService = new MetodService(idb);
         //Döljer panelen för ändringar
         pnlElevInformation.setVisible(false);
-        //Fyller listor för kurser ovh sovsalar
-        fyllKursLista();
+        //Fyller listor för kurser och sovsalar
+        metodService.fyllComboboxKurserLarare(cbKursLista);
         fyllSovsalsLista();
-        lblAndringarSparats.setForeground (Color.green);
+
     }
 
     /**
@@ -111,6 +111,8 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
         lblGenerellElevInfo.setText("Generell elevinfomation");
 
         lblSovsal.setText("Sovsal:");
+
+        cbSovsal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj en sovsal" }));
 
         lblAndringarSparats.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblAndringarSparats.setText("Ändringarna har sparats!");
@@ -214,6 +216,8 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
             }
         });
 
+        cbKursLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj en kurs" }));
+
         javax.swing.GroupLayout pnlAndraElevKursLayout = new javax.swing.GroupLayout(pnlAndraElevKurs);
         pnlAndraElevKurs.setLayout(pnlAndraElevKursLayout);
         pnlAndraElevKursLayout.setHorizontalGroup(
@@ -270,13 +274,16 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSokElev)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSokElev)
+                            .addComponent(pnlElevInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(28, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfNamnFalt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(btnSok))
-                    .addComponent(pnlElevInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(btnSok)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +296,7 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
                     .addComponent(btnSok))
                 .addGap(26, 26, 26)
                 .addComponent(pnlElevInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -362,21 +369,55 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     }
     
     private void fyllKursLista() {
-        try {
-            //Hämtar en lista på kursnamn på alla kurser i databasen
-            ArrayList<HashMap<String, String>> kursLista = idb.fetchRows("SELECT kursnamn FROM kurs");
-            //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
-            for (int i = 0; i < kursLista.size(); i++) {
-                    String kursNamn = kursLista.get(i).get("KURSNAMN");
-                        cbKursLista.addItem(kursNamn);
+        //Kontrollerar om den inloggade läraren är admin
+        if(FrmLoggaIn.getArAdmin()) {
+            try {
+                //Hämtar en lista på kursnamn på alla kurser i databasen
+                ArrayList<HashMap<String, String>> kursLista = idb.fetchRows("SELECT kursnamn FROM kurs");
+                //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
+                for (int i = 0; i < kursLista.size(); i++) {
+                        String kursNamn = kursLista.get(i).get("KURSNAMN");
+                            cbKursLista.addItem(kursNamn);
             } 
+            }
+            catch (InfException ettUndantag) {
+                ettUndantag.getMessage();
+            }
+            catch (NullPointerException ettAnnatUndantag) {
+                ettAnnatUndantag.getMessage();
+            }   
         }
-        catch (InfException ettUndantag) {
-            ettUndantag.getMessage();
+        else {
+            try {
+                //Hämtar lärar ID på den inloggade läraren
+                String lararID = FrmLoggaIn.getArInloggadSom();
+                //Hämtar en lista på kursnamn på lärarens kurser i databasen
+                ArrayList<HashMap<String, String>> kursLista = idb.fetchRows("SELECT kursnamn FROM kurs WHERE kurslarare = " + lararID);
+                //Kontrollerar om läraren har några kurser kopplade till sig, annars är listan null
+                if (kursLista != null) {
+                    //Loopar igenom listan och lägger till alla kursnamn till kurslistan i fönstret
+                    for (int i = 0; i < kursLista.size(); i++) {
+                        String kursNamn = kursLista.get(i).get("KURSNAMN");
+                        cbKursLista.addItem(kursNamn);  
+                    }
+                }
+                else {
+                    //Byter ut "Välj en kurs" och visar istället "Inga kurser att visa"
+                    cbKursLista.removeItemAt(0);
+                    String meddelande = "Inga kurser att visa";
+                    cbKursLista.addItem(meddelande);
+                }
+
+                
+            }
+            catch (InfException ettUndantag) {
+                ettUndantag.getMessage();
+            }
+            catch (NullPointerException ettAnnatUndantag) {
+                ettAnnatUndantag.getMessage();
+            }  
         }
-        catch (NullPointerException ettAnnatUndantag) {
-            ettAnnatUndantag.getMessage();
-        }    
+   
     }
     
     private void fyllSovsalsLista() {
@@ -458,33 +499,45 @@ public class FrmLarareRedigeraElev extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSparaAndringActionPerformed
 
     private void btnTaBortKursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortKursActionPerformed
-        //Hämtar vilken kurs som valts i listan
-        String kursNamn = cbKursLista.getSelectedItem().toString();
-         try {
-             String kursID = idb.fetchSingle("SELECT kurs_id FROM kurs WHERE kursnamn = \'" + kursNamn + "\'");            
-             idb.delete("DELETE FROM registrerad_pa WHERE elev_id = \'" + elevID + "\' AND kurs_id = \'" + kursID + "\'");
-             taAktuellKurs.setText("");
-             fyllAktuellaKurser();
-         }
-         catch (InfException ettUndantag) {
-            ettUndantag.getMessage();
-            JOptionPane.showMessageDialog(null, "Kan ej ta bort, eleven är inte registrerad på den kursen");
+        if (Validering.elementHarValtsICombobox(cbKursLista, "Välj en kurs")) {
+            //Hämtar vilken kurs som valts i listan
+            String kursNamn = cbKursLista.getSelectedItem().toString();
+             try {
+                 //Hämtar kursID på den valda kursen
+                 String kursID = idb.fetchSingle("SELECT kurs_id FROM kurs WHERE kursnamn = \'" + kursNamn + "\'");            
+                 //Tar bort kursID och elevID från tabelled "Registrerad_pa" i databasen
+                 idb.delete("DELETE FROM registrerad_pa WHERE elev_id = \'" + elevID + "\' AND kurs_id = \'" + kursID + "\'");
+                 //Tömmer listan på aktuella kurser
+                 taAktuellKurs.setText("");
+                 //Fyller listan igen med nuvaranade värden för att spegla ändringar
+                 fyllAktuellaKurser();
+             }
+             catch (InfException ettUndantag) {
+                ettUndantag.getMessage();
+                JOptionPane.showMessageDialog(null, "Kan ej ta bort, eleven är inte registrerad på den kursen");
+            }
         }
     }//GEN-LAST:event_btnTaBortKursActionPerformed
 
     private void btnLaggTillKursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillKursActionPerformed
-        //Hämtar vilken kurs som valts i listan
-        String kursNamn = cbKursLista.getSelectedItem().toString();
-         try {
-             String kursID = idb.fetchSingle("SELECT kurs_id FROM kurs WHERE kursnamn = \'" + kursNamn + "\'");            
-             idb.insert("INSERT INTO registrerad_pa(elev_id, kurs_id) \n" +
+        if (Validering.elementHarValtsICombobox(cbKursLista, "Välj en kurs")) {
+            //Hämtar vilken kurs som valts i listan
+            String kursNamn = cbKursLista.getSelectedItem().toString();
+            try {
+                //Hämtar kursID på den vslda kursen
+                String kursID = idb.fetchSingle("SELECT kurs_id FROM kurs WHERE kursnamn = \'" + kursNamn + "\'");            
+                //Lägger till kursID och elevID i "Registrerad_pa"-tabellen
+                idb.insert("INSERT INTO registrerad_pa(elev_id, kurs_id) \n" +
                      "VALUES (" + elevID +", " + kursID + ")");
-             taAktuellKurs.setText("");
-             fyllAktuellaKurser();
-         }
-         catch (InfException ettUndantag) {
-            ettUndantag.getMessage();
-            JOptionPane.showMessageDialog(null, "Kan ej lägga till, eleven är redan registrerad på kursen");
+                //Tömmer listan på aktuella kurser
+                taAktuellKurs.setText("");
+                //Fyller listan igen med nuvaranade värden för att spegla ändringar
+                fyllAktuellaKurser();
+            }
+            catch (InfException ettUndantag) {
+                ettUndantag.getMessage();
+                JOptionPane.showMessageDialog(null, "Kan ej lägga till, eleven är redan registrerad på kursen");
+            }  
         }
     }//GEN-LAST:event_btnLaggTillKursActionPerformed
 
